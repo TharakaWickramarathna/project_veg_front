@@ -1,0 +1,46 @@
+<div class="container">
+<div class="row" style="margin-top:15px;">
+    <div class="col-md-12">
+      <section class="text-center pb-1 my-0">
+        <!--Section heading-->
+        <h2 class="h1 ">Products on the Market</h2>
+        <!--Section description-->
+        <!-- <p class="grey-text pb-1">Special discount packages</p> -->
+      </section>
+    </div>
+</div>
+    <mdb-card class="card  pb-0 rounded w-100">
+        <mdb-card-body>
+  
+          <div class="container">
+            <div class="row">
+              <div class="colm" *ngFor="let card of cards">
+                <mdb-card class="card text-center pb-0 rounded hoverable">
+                  <div class="view overlay">
+                    <img class="card-img-top img-responsive" style="height: 150px;"
+                      [src]="card.imgSrc">
+                    <a>
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <mdb-card-body>
+
+                    <mdb-card-title class="text-center">
+                      <h4 style="height: 30px;">{{card.productName}}</h4>
+                      <hr class="warning-color">
+                    </mdb-card-title>
+                    
+                    <h4 class="text-center" >100g / Rs {{card.unitPrice}}/=</h4>
+                    <hr class="warning-color">
+                    
+          
+                    <button mdbBtn color="success" rounded="true" (click) = "openModal(card.productID,card.productName,card.unitPrice,card.imgSrc)">ADD TO CART   <mdb-icon fas icon="cart-plus" style="margin-left: 10px;"></mdb-icon></button>
+                  </mdb-card-body>
+                </mdb-card>
+              </div>
+            </div>
+          </div>
+  
+        </mdb-card-body>
+    </mdb-card>
+  </div>

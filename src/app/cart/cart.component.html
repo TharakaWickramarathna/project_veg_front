@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12">
+            <section class="text-center pb-1 my-1">
+                <!--Section heading-->
+                <h2 class="h1 ">My Shopping Cart</h2>
+                <hr>
+            </section>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table mdbTable mdbTableScroll scrollY="true" maxHeight="600" bordered="true">
+            <thead class="success-color white-text">
+                <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr mdbTableCol *ngFor="let item of cartItems">
+                    <th scope="row">{{item.isPack}}</th>
+                    <td><img [src]="item.imgSrc" class="img-responsive size"></td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.weight | cartQuantityAndWeightPipe}}</td>
+                    <td>Rs {{item.totalAmountPerItem}}/=</td>
+                    <td><span class="table-remove">
+        <button mdbBtn type="button" color="danger" rounded="true" size="sm" mdbWavesEffect (click)="onClickRemove(item.productID)">X</button>
+      </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <hr>
+
+    <div class="row" style="margin-top: 50px; margin-bottom: 110px;">
+        <div class="col-md-12">
+            <section class="text-right pb-1 my-1">
+                <!--Section heading-->
+                <h2 class="h1 ">Total :Rs {{totalAmount}}/=</h2>
+                <button mdbBtn type="button" color="success" rounded="true" size="lg" mdbWavesEffect (click)="orderConfirmModal()">CheckOut</button>
+            </section>
+        </div>
+    </div>
+    <hr>
+</div>

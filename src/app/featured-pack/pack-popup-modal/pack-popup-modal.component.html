@@ -1,0 +1,40 @@
+<div mdb-card class="modal-content container">
+  
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h2 class="modal-title w-100" id="myModalLabel">{{packageName }}</h2>
+  </div>
+  
+        <div class="modal-body">
+          <div class="row" *ngFor="let listItem of productList | packageDescriptionPipe:content.packageID">
+            <div class="col-md-12  list-group-item clearfix">
+              <div class="float-left">
+                <h2>{{listItem.productID | packageItemNamingPipe}}</h2>
+                <p style="margin-top: 2px;">{{listItem.quantity}}g</p>
+              </div>
+                <span class="float-right">
+                  <img [src]="listItem.productID | packageItemImagePipe" alt="" style="width: auto;height: 70px;" class="img-responsive">
+                </span>
+            </div>
+          </div>
+        </div>
+
+
+          <div class="row ">
+    
+            
+    
+
+
+</div>
+
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-md-12" >
+      <button mdbBtn class="warning-color" rounded="true" style="color: white;padding-left: 25px;padding-right: 25px;"
+      (click)="onClickAddToCart()" >CONFIRM AND ADD TO CART   <mdb-icon fas icon="cart-plus" style="margin-left: 10px;"></mdb-icon></button>
+    </div>
+  </div>
+</div>

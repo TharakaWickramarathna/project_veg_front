@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row" style="margin-top:15px;">
+    <div class="col-md-12">
+      <section class="text-center pb-1 my-0">
+        <!--Section heading-->
+        <h2 class="h1 ">My Packages</h2>
+        <!--Section description-->
+        <!-- <p class="grey-text pb-1">Special discount packages</p> -->
+      </section>
+    </div>
+  </div>
+
+  <mdb-card class="card pb-0 rounded w-100 col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="float-right mx-auto-left my-4">
+          <button type="button" mdbBtn color="success" size="lg" class="waves-light" data-toggle="modal"
+            data-target="#basicExample" (click)="onCreatClick()" mdbWavesEffect>Create New</button>
+        </div>
+      </div>
+    </div>
+
+    <mdb-card-body>
+
+      <div class="container">
+        <div class="row">
+
+          <!-- <div class="mx-auto my-4 ">
+
+            <mdb-card cascade="true" class="text-center pb-0 hoverable" style="height: 390px;">
+              <div class="view rgba-white-slight text-center waves-light" mdbWavesEffect>
+                 <mdb-card-img class="card-img-top img-responsive"  style="max-height: 150px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ16L6RygprLcledV0rJLvzgiZMbBCK5u7c7ZUHqBYrwFpx9apv&usqp=CAU" alt="Card image cap"></mdb-card-img> 
+                <mdb-icon fas icon="cart-plus" size="8x" style="margin-top: 30px;" class="amber-text"
+                  aria-hidden="true">
+                </mdb-icon>
+
+              </div>
+              
+              <mdb-card-body>
+
+                <mdb-card-text> Create a new pack using available products
+                </mdb-card-text>
+
+                <a mdbBtn color="success" (click)="onCreatClick()" mdbWavesEffect>Create New Pack</a>
+                
+
+              </mdb-card-body>
+            </mdb-card>
+          </div> -->
+
+          <div class="colm" *ngFor="let packs of myPacks ; let i = index ">
+
+            <mdb-card class="card text-center pb-1 rounded hoverable">
+              <div class="view overlay waves-light">
+                <img class="card-img-top img-responsive" style="height: 150px;"
+                  src="https://i.ndtvimg.com/i/2015-04/fruits-veggies-full_600x350_71428309873.jpg">
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <!--Card content-->
+              <mdb-card-body cascade="true" class="text-center pb-0">
+                <!--Title-->
+                <mdb-card-title>
+                  <h4 style="height: 30px;">{{packs.packageName}}</h4>
+                  <h5></h5>
+                </mdb-card-title>
+
+                <!--Text-->
+                <mdb-card-text>
+                  <div class="container example-1 scrollbar-ripe-malinka">
+                    <div class="row" *ngFor="let packsDes of myPackDes | packageDescriptionPipe: packs.packageID">
+                      <div>{{packsDes.productID | packageItemNamingPipe}} </div>
+                      <div> {{packsDes.quantity}}</div>
+                    </div>
+                  </div>
+                </mdb-card-text>
+                
+                  <a mdbBtn color="success" mdbWavesEffect (click)="openViewPackageModal(packs.packageID)"
+                    class="w-100">ADD TO CART</a>
+                  <!-- <a mdbBtn color="primary"  mdbWavesEffect >Edit</a> -->
+                  <a mdbBtn color="success" mdbWavesEffect (click)="onEditClick(packs.packageID)" class="w-100">EDIT</a>
+                
+
+              </mdb-card-body>
+            </mdb-card>
+
+          </div>
+
+        </div>
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+
+</div>

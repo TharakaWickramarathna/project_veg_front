@@ -1,0 +1,89 @@
+
+    <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Confirm Order</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <div class="modal-body mx-3">
+          <!-- <div class="md-form mb-5">
+            <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+            <input type="text" id="orangeForm-name" class="form-control"
+                   mdbInput mdbValidate>
+            <label for="orangeForm-name">Your name</label>
+            <mdb-error *ngIf="signupFormModalName.invalid && (signupFormModalName.dirty || signupFormModalName.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success *ngIf="signupFormModalName.valid && (signupFormModalName.dirty || signupFormModalName.touched)">
+              Input valid
+            </mdb-success>
+          </div> -->
+          
+          <div class="md-form mb-5">
+              <mdb-icon fas icon="phone" class="prefix grey-text"></mdb-icon>
+              <input type="text" id="orangeForm-contact" class="form-control"
+                     mdbInput mdbValidate>
+              <label for="orangeForm-contact">Your Contact</label>
+              <!-- <mdb-error *ngIf="signupFormModalContact.invalid && (signupFormModalContact.dirty || signupFormModalContact.touched)">
+                Input invalid
+              </mdb-error>
+              <mdb-success *ngIf="signupFormModalContact.valid && (signupFormModalContact.dirty || signupFormModalContact.touched)">
+                Input valid
+              </mdb-success> -->
+            </div>
+  
+            <div class="md-form mb-5">
+              <mdb-icon fas icon="home" class="prefix grey-text"></mdb-icon>
+              <input type="text" id="orangeForm-address" class="form-control" 
+                     mdbInput mdbValidate>
+              <label for="orangeForm-address">Order Address</label>
+              <!-- <mdb-error *ngIf="signupFormModalAddress.invalid && (signupFormModalAddress.dirty || signupFormModalAddress.touched)">
+                Input invalid
+              </mdb-error>
+              <mdb-success *ngIf="signupFormModalAddress.valid && (signupFormModalAddress.dirty || signupFormModalAddress.touched)">
+                Input valid
+              </mdb-success> -->
+            </div>
+  
+  
+          <!-- <div class="md-form mb-5">
+            <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+            <input type="email" id="orangeForm-email" class="form-control" 
+                   mdbInput mdbValidate>
+            <label for="orangeForm-email">Your email</label>
+            <mdb-error
+              *ngIf="signupFormModalEmail.invalid && (signupFormModalEmail.dirty || signupFormModalEmail.touched)">Input
+              invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="signupFormModalEmail.valid && (signupFormModalEmail.dirty || signupFormModalEmail.touched)">Input
+              valid
+            </mdb-success>
+          </div> -->
+  
+          <!-- <div class="md-form mb-4">
+            <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+            <input type="password" id="orangeForm-pass" class="form-control"
+                   mdbInput mdbValidate>
+            <label for="orangeForm-pass">Your password</label>
+            <mdb-error
+              *ngIf="signupFormModalPassword.invalid && (signupFormModalPassword.dirty || signupFormModalPassword.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="signupFormModalPassword.valid && (signupFormModalPassword.dirty || signupFormModalPassword.touched)">
+              Input valid
+            </mdb-success>
+          </div> -->
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <div class="form-group mt-4">
+              <mdb-checkbox>I Accept the all the<a class="green-text font-weight-bold"> Payments and Delivery Terms and Conditions</a></mdb-checkbox>
+            </div>
+          <button mdbBtn color="success" class="waves-light"  mdbWavesEffect>Confirm Order</button>
+        </div>
+      </div>
+  
+  

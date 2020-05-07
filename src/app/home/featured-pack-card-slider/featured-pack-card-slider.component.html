@@ -1,0 +1,65 @@
+<div class="row" style="margin-top: 50px;">
+
+  <mdb-card class="w-100">
+    <mdb-card-body>
+
+      <div class="col-md-12 w-100">
+        <section class="text-center pb-1 my-0">
+
+          <h2 class="h1 font-weight-bold ">Special Packages</h2>
+          <hr class="warning-color" width="250px">
+          <!--Section description-->
+          <p class="black-text pb-1">A fine selection of the highest quality, freshest vegetables with discount
+            packages. <br /> Buy online and have them delivered direct to your home in Colombo. Freshness and quality
+            guaranteed.</p>
+
+        </section>
+      </div>
+      <mdb-carousel [isControls]="false" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
+        [animation]="'slide'">
+        <mdb-carousel-item *ngFor="let item of slides; let i = index">
+          <div [class]="size" *ngFor="let card of item; let cardIndex = index" [ngClass]="{make:onc}">
+         
+            <!-- Card Light -->
+            <div class="card text-center pb-0 rounded hoverable" style="margin-top: 25px;" (click)="onViewMoreClicked()">
+
+              <!-- Card image -->
+              <div class="view overlay">
+                <img class="card-img-top img-responsive" style="height: 120px;"
+                  src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/powerhouse_vegetables_slideshow/650x350_powerhouse_vegetables_slideshow.jpg"
+                  style="max-height: 150px;">
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body ">
+
+                <!-- Title -->
+                <hr class="warning-color">
+                <h4 class="card-title green-text font-weight-bold" style="height: 25px;">{{card.packageName}}</h4>
+                <p class="card-title" style="height: 30px;">Rs.{{card.price}} /=</p>
+                <hr class="warning-color">
+                <!-- Text -->
+                <p class="card-text">Click on the Packages to see the items that are included. Special Discounts are added.</p>
+                <!-- Link -->
+                <!-- <a (click)="onViewMoreClicked()" class="black-text d-flex justify-content-end">
+                  <h5 class="text-success">View more <i class="fas fa-angle-double-right"></i></h5>
+                </a> -->
+              </div>
+
+            </div>
+            <!-- Card Light -->
+
+            <!-- Card -->
+          </div>
+        </mdb-carousel-item>
+      </mdb-carousel>
+      <a (click)="onViewMoreClicked()" class="black-text d-flex justify-content-end" style="margin-top: 10px; margin-right: 25px;">
+        <h5 class="text-success">View More Packages <i class="fas fa-angle-double-right"></i></h5>
+      </a>
+    </mdb-card-body>
+  </mdb-card>
+
+</div>

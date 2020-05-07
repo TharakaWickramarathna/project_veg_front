@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="h1 font-weight-bold ">Packages</h2>
+            <div>
+                <button type="button" mdbBtn color="success" size="lg" class="waves-light" data-toggle="modal"
+            data-target="#basicExample" (click)="onCreateClick()" mdbWavesEffect>Create New</button>
+              </div>
+            <hr class="warning-color">
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="colm col-md-3" *ngFor="let pack of packages ; let i = index ">
+
+            <mdb-card class="card pb-0 rounded hoverable" (click)="onClickPack(pack.packageID)">
+                <mdb-card-body cascade="true" class="pb-0">
+                    <mdb-card-title class="text-center">
+                        <h2 style="height: 30px;">{{pack.packageName}}</h2>
+                        <h4>Rs.{{pack.price}} /=</h4>
+                    </mdb-card-title>
+                    <hr class="warning-color">
+                    <mdb-card-text>
+                        <div class="container example-1 scrollbar-ripe-malinka">
+                            <div class="row" *ngFor="let packDes of packageDes | packageDescriptionPipe:pack.packageID">
+                                <div class="float-left">{{packDes.productID | packageItemNamingPipe}} - </div>
+                                <div class="float-right"> {{packDes.quantity}} g</div>
+                            </div>
+                        </div>
+
+                    </mdb-card-text>
+
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+
+    </div>
+</div>

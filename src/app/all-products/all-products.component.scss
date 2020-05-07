@@ -1,0 +1,35 @@
+@media(max-width:500px){
+    .colm {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+@media(min-width:500px) and (max-width:768px){
+    .colm {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 15px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 992px){
+    .colm {
+        width: 50%;
+        padding: 25px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .colm {
+        width: 33.33%;
+        padding: 15px;
+    }
+}
+@media (min-width: 1200px) {
+    .colm {
+        width: 25%;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,58 @@
+<div class="container">
+<div class="row" style="margin-top:15px;">
+    <div class="col-md-12">
+      <section class="text-center pb-1 my-0">
+        <!--Section heading-->
+        <h2 class="h1 ">Special Packages</h2>
+        <!--Section description-->
+        <!-- <p class="grey-text pb-1">Special discount packages</p> -->
+      </section>
+    </div>
+</div>
+    <mdb-card class="card pb-0 rounded w-100">
+        <mdb-card-body>
+
+          <!-- <div class="container"> -->
+            <div class="row">
+
+              <div class="colm" *ngFor="let card of cards ; let i = index ">
+                
+                <mdb-card class="card text-center pb-0 rounded hoverable">
+                  <div class="view overlay">
+                    <img class="card-img-top img-responsive" style="height: 150px;"
+                      [src]="card.imgSrc">
+                    <a>
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+                  <mdb-card-body cascade="true" class="text-center pb-0">
+                    <mdb-card-title>
+                      <h4 style="height: 30px;">{{card.packageName}}</h4>
+                      <hr class="warning-color">
+                    </mdb-card-title>
+                    <h4>Rs.{{card.price}} /=</h4>
+          
+                    <mdb-card-text >
+                      <div class="container example-1 scrollbar-ripe-malinka">
+                        <div class="row" *ngFor="let item of cardsDes | packageDescriptionPipe:card.packageID">
+                          <div>{{item.productID | packageItemNamingPipe}} - </div>
+                          <div> {{item.quantity}}g</div>
+                        </div>
+                      </div>
+                      
+                    </mdb-card-text>
+          
+                    <button mdbBtn color="success" (click) = "openPackageModal(card.packageID)">VIEW ADD TO CART <mdb-icon fas icon="cart-plus" style="margin-left: 10px;"></mdb-icon></button>
+                  
+                  </mdb-card-body>
+                </mdb-card>
+              </div>
+            <!-- </div> -->
+          </div>
+
+        </mdb-card-body>
+    </mdb-card>
+</div>
+
+
+

@@ -1,0 +1,106 @@
+<div mdb-card class="modal-content container">
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h2 class="modal-title w-100" id="myModalLabel">{{ heading }}</h2>
+  </div>
+  <!-- <div class="modal-body">
+      <h5>{{ content.heading }}</h5>
+      <p>{{ content.description }}</p>
+      <input type="text" [(ngModel)]="abc">
+    </div>
+    <div class="modal-footer">
+      <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="modalRef.hide()" mdbWavesEffect>Close</button>
+      <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click) = "onYesClick()">Save!</button>
+    </div> -->
+
+
+
+  <!-- <mdb-card-body> -->
+
+  <!-- Card deck -->
+  <!-- <div>
+        
+        <div> -->
+  <!-- Card Light -->
+  <!-- <div class="card"> -->
+
+  <!-- Card image -->
+  <div class="view overlay text-center">
+    <img class="card-img-top img-responsive rounded " [src]="content.imgSrc" style="height: 150px;">
+    <a>
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body ">
+
+    <!-- Title -->
+    <h1 class="card-title green-text" style="font-weight: 100;">{{content.productName}}</h1>
+    <hr class="warning-color">
+    <!-- <p class="card-title">ssssssssssss</p> -->
+
+    <div class="row">
+      <div class="col-4" style="text-align: center;">
+        <button mat-mini-fab class="warning-color" aria-label="Example icon button with a plus one icon"
+          (click)="onMinusClick()">
+          <mdb-icon fas icon="minus" style="color: white;"></mdb-icon>
+        </button>
+      </div>
+
+      <div class="col-4" style="text-align: center;">
+        <h1 style="font-weight: 500;">{{weight}} g</h1>
+      </div>
+
+      <div class="col-4" style="text-align: center;">
+        <button mat-mini-fab class="warning-color" aria-label="Example icon button with a plus one icon"
+          (click)="onPlusClick()">
+          <mdb-icon fas icon="plus" style="color: white;"></mdb-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="row success-color text-center rounded" style="margin-top: 10px;color: white;">
+      <div class="col-5 center">
+        <h2>Total Price</h2>
+      </div>
+
+      <div class="col-2 center">
+        <h1> = </h1>
+      </div>
+
+      <div class="col-5 center">
+        <h2>Rs {{totalPrice}}/=</h2>
+      </div>
+    </div>
+
+    <div class="row" style="text-align: center;">
+      <div class="col-12">
+        <button mdbBtn class="warning-color" rounded="true" style="color: white;padding-left: 25px;padding-right: 25px;"
+          (click)="onClickAddToCart()">CONFIRM AND ADD TO CART <mdb-icon fas icon="cart-plus"
+            style="margin-left: 10px;"></mdb-icon></button>
+      </div>
+    </div>
+
+
+
+
+    <!-- Text -->
+
+  </div>
+
+  <!-- </div> -->
+  <!-- Card Light -->
+  <!-- </div>
+      
+      </div> -->
+  <!-- Card deck -->
+
+  <!-- </mdb-card-body> -->
+
+
+
+</div>

@@ -1,0 +1,159 @@
+<form class="form-horizontal" (ngSubmit)="registerUser()" [formGroup]="userForm">
+    <div class="modal-content">
+
+
+        <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+
+        <div class="modal-body mx-3">
+
+            <!-- first Name -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-FistName" formControlName="firstname" class="form-control" [formControl]="signupFormModalFirstName" mdbInput mdbValidate>
+                <label for="orangeForm-FirstName">First Name</label>
+                <mdb-error *ngIf="signupFormModalFirstName.invalid && (signupFormModalFirstName.dirty || signupFormModalFirstName.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalFirstName.valid && (signupFormModalFirstName.dirty || signupFormModalFirstName.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+
+            <!-- last name -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-LastName" formControlName="lastname" class="form-control" [formControl]="signupFormModalLastName" mdbInput mdbValidate>
+                <label for="orangeForm-name">Last Name</label>
+                <mdb-error *ngIf="signupFormModalLastName.invalid && (signupFormModalLastName.dirty || signupFormModalLastName.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalLastName.valid && (signupFormModalLastName.dirty || signupFormModalLastName.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- email -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+                <input type="email" id="orangeForm-email" class="form-control" [formControl]="signupFormModalEmail" mdbInput mdbValidate formControlName="email">
+                <label for="orangeForm-email">Enter a email</label>
+                <mdb-error *ngIf="signupFormModalEmail.invalid && (signupFormModalEmail.dirty || signupFormModalEmail.touched)">Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalEmail.valid && (signupFormModalEmail.dirty || signupFormModalEmail.touched)">Input valid
+                </mdb-success>
+            </div>
+            <!-- mobile number -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="phone" class="prefix grey-text"></mdb-icon>
+                <input type="number" id="orangeForm-mobilecontact" class="form-control" [formControl]="signupFormModalMobileNumber" mdbInput mdbValidate formControlName="mobileNumber">
+                <label for="orangeForm-mobilecontact">Mobile Number </label>
+                <mdb-error *ngIf="signupFormModalMobileNumber.invalid && (signupFormModalMobileNumber.dirty || signupFormModalMobileNumber.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalMobileNumber.valid && (signupFormModalMobileNumber.dirty || signupFormModalMobileNumber.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- home number -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="phone" class="prefix grey-text"></mdb-icon>
+                <input type="number" id="orangeForm-homenumber" class="form-control" [formControl]="signupFormModalHomeNumber" mdbInput mdbValidate formControlName="homeNumber">
+                <label for="orangeForm-homenumber">Home Number </label>
+                <mdb-error *ngIf="signupFormModalHomeNumber.invalid && (signupFormModalHomeNumber.dirty || signupFormModalHomeNumber.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalHomeNumber.valid && (signupFormModalHomeNumber.dirty || signupFormModalHomeNumber.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- address 1 -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="home" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-address1" class="form-control" [formControl]="signupFormModalAddress1" mdbInput mdbValidate formControlName="addressLine1">
+                <label for="orangeForm-address1">Address Line 1</label>
+                <mdb-error *ngIf="signupFormModalAddress1.invalid && (signupFormModalAddress1.dirty || signupFormModalAddress1.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalAddress1.valid && (signupFormModalAddress1.dirty || signupFormModalAddress1.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- address 2 -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="home" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-address2" class="form-control" [formControl]="signupFormModalAddress2" mdbInput mdbValidate formControlName="addressLine2">
+                <label for="orangeForm-address2">Address Line 2</label>
+                <mdb-error *ngIf="signupFormModalAddress2.invalid && (signupFormModalAddress2.dirty || signupFormModalAddress2.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalAddress2.valid && (signupFormModalAddress2.dirty || signupFormModalAddress2.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- address3 -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="home" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-address3" class="form-control" [formControl]="signupFormModalAddress3" mdbInput mdbValidate formControlName="addressLine3">
+                <label for="orangeForm-address3">Address Line 3</label>
+                <mdb-error *ngIf="signupFormModalAddress3.invalid && (signupFormModalAddress3.dirty || signupFormModalAddress3.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalAddress3.valid && (signupFormModalAddress3.dirty || signupFormModalAddress3.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- postal code -->
+            <div class="md-form mb-5">
+                <mdb-icon fas icon="home" class="prefix grey-text"></mdb-icon>
+                <input type="text" id="orangeForm-postal" class="form-control" [formControl]="signupFormModalPostalCode" mdbInput mdbValidate formControlName="postalCode">
+                <label for="orangeForm-postal">Postal Code</label>
+                <mdb-error *ngIf="signupFormModalPostalCode.invalid && (signupFormModalPostalCode.dirty || signupFormModalPostalCode.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalPostalCode.valid && (signupFormModalPostalCode.dirty || signupFormModalPostalCode.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- password -->
+            <div class="md-form mb-4">
+                <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                <input type="password" id="orangeForm-pass" class="form-control" [formControl]="signupFormModalPassword" mdbInput mdbValidate formControlName="password">
+                <label for="orangeForm-pass">Enter a password</label>
+                <mdb-error *ngIf="signupFormModalPassword.invalid && (signupFormModalPassword.dirty || signupFormModalPassword.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalPassword.valid && (signupFormModalPassword.dirty || signupFormModalPassword.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+            <!-- re enter password -->
+            <div class="md-form mb-4">
+                <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                <input type="password" id="orangeForm-repass" class="form-control" [formControl]="signupFormModalRePassword" mdbInput mdbValidate formControlName="repassword">
+                <label for="orangeForm-repass">Repeat Your password</label>
+                <mdb-error *ngIf="signupFormModalRePassword.invalid && (signupFormModalRePassword.dirty || signupFormModalRePassword.touched)">
+                    Input invalid
+                </mdb-error>
+                <mdb-success *ngIf="signupFormModalRePassword.valid && (signupFormModalRePassword.dirty || signupFormModalRePassword.touched)">
+                    Input valid
+                </mdb-success>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <div class="form-group mt-4">
+                <mdb-checkbox>I Accept the<a class="green-text font-weight-bold"> Terms and Conditions</a></mdb-checkbox>
+            </div>
+            <button mdbBtn color="success" class="waves-light" mdbWavesEffect [disabled]="!userForm.valid">Sign up</button>
+            <div class="options text-center ">
+                <p class="pt-1"> Alerady have an account? <a class="green-text" (click)="openSignIn()">  Sign In</a></p>
+            </div>
+
+        </div>
+
+    </div>
+</form>

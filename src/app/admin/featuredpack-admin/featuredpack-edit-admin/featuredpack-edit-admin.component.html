@@ -1,0 +1,279 @@
+<mdb-card>
+    <mdb-card-body>
+
+        <div class="col-md-12">
+            <div class="clearfix">
+
+                <div class="float-left w-50">
+                    <div class="md-form">
+                        <mdb-icon fas icon="cart-arrow-down" class="prefix"></mdb-icon>
+                        <input mdbInput type="text" id="form2" class="form-control" [(ngModel)]="packageName">
+                        <label for="form2">Package Name</label>
+                    </div>
+                </div>
+
+                <div class="float-right">
+                    <button type="button" mdbBtn color="danger" size="lg" class="waves-light" data-toggle="modal"
+                        data-target="#basicExample" (click)="frame.show()" mdbWavesEffect>DELETE PACKAGE</button>
+                </div>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="black white-text">
+                <tr>
+                    <th>
+                        <img class="img-responsive" style="max-height: 50px;" [src]="selectedItemImg"
+                            alt=" Prodcut image">
+                    </th>
+                    <th>
+                        <select class="browser-default custom-select" (change)="selectOption($event.target.value)">
+                            <option selected>Select Product</option>
+                            <option *ngFor="let item of items" [value]="item.productID">{{item.productName}}</option>
+                        </select>
+                        
+                    </th>
+                    <th>
+                        <div class="row">
+                            <button mat-mini-fab class="warning-color " (click)="onMinusClick()">
+                                <mdb-icon fas icon="minus" style="color: white;"></mdb-icon>
+                            </button>
+                            <h2> {{selectedItemweight}}g </h2>
+                            <button mat-mini-fab class="warning-color" (click)="onPlusClick()">
+                                <mdb-icon fas icon="plus" style="color: white;"></mdb-icon>
+                            </button>
+                        </div>
+                    </th>
+
+                    <th>
+                        <h1>Rs.{{selectedItemTotalPrice}}/=</h1>
+                    </th>
+                    <th>
+                        <button mdbBtn type="button" color="success" rounded="true" size="sm" (click)="addToTable()"
+                            mdbWavesEffect>Click to Add</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <div class="table-responsive " style="margin-top: 25px;">
+
+            <table mdbTable mdbTableScroll scrollY="true" class="table-fixed table-striped mx-auto  my-4 "
+                maxHeight="300" style="margin-top: 25px;">
+                <thead class="black white-text">
+                    <tr>
+                        <th class="text-center" *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr mdbTableCol *ngFor="let item of addedItems">
+                        
+                        <td><img class="img-responsive" style="max-height: 50px; max-width: 50px;" [src]="item.imgSrc"
+                                alt=" Prodcut image">
+                        </td>
+                        <td>{{item.productName}}</td>
+                        <td>{{item.weight}}g</td>
+                        <td>Rs.{{item.totalPricePerItem}}</td>
+                        <td>yes</td>
+                        <td class="text-center"><span class="table-remove">
+                                
+                                <mdb-icon fas icon="times" class="red-text pr-3" size="2x" mdbWavesEffect
+                                    (click)="onRemoveClick(item.productID)"></mdb-icon>
+                            </span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="row text-left" style="margin-top: 20px; margin-left: 10px;">
+
+            <div class="float-left">
+                <div class="md-form">
+                    <input mdbInput type="number" id="form4" class="form-control" [(ngModel)]="packageDiscount">
+                    <label for="form4">Enter Package Discount</label>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <section class="text-left pb-1 my-1">
+                    <h2 class="h1 ">Total :Rs {{packTotalPrice}}/= </h2>
+                    <button mdbBtn type="button" color="success" rounded="true" size="lg" mdbWavesEffect
+                        (click)="onConfirmClick()">Confirm & Update Package</button>
+                </section>
+            </div>
+        </div>
+        
+
+
+
+
+    </mdb-card-body>
+</mdb-card>
+
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        
+        <div class="modal-content text-center">
+           
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Are you sure?</p>
+            </div>
+
+            <div class="modal-body">
+                <mdb-icon fas icon="times" size="4x" class="animated rotateIn"></mdb-icon>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <a (click)="onDeleteClick()" mdbBtn color="danger" outline="true" class="waves-effect"
+                    mdbWavesEffect>Yes</a>
+                <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal"
+                    (click)="frame.hide()">No</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- <mdb-card>
+    <mdb-card-body>
+
+        <div class="col-md-12">
+            <div class="clearfix">
+
+                <div class="float-left w-50">
+                    <div class="md-form">
+                        <mdb-icon fas icon="cart-arrow-down" class="prefix"></mdb-icon>
+                        <input mdbInput type="text" id="form2" class="form-control" [(ngModel)]="packageName">
+                        <label for="form2">Package Name</label>
+                    </div>
+                </div>
+
+                <div class="float-right">
+                    <button type="button" mdbBtn color="danger" size="lg" class="waves-light" data-toggle="modal"
+                        data-target="#basicExample" (click)="frame.show()" mdbWavesEffect>DELETE PACK</button>
+                </div>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead class="black white-text">
+                <tr>
+                    <th>
+                        <img class="img-responsive" style="max-height: 50px;" [src]="selectedItemImg"
+                            alt=" Prodcut image">
+                    </th>
+                    <th>
+                        <select class="browser-default custom-select" (change)="selectOption($event.target.value)">
+                            <option selected>Select Product</option>
+                            <option *ngFor="let item of items" [value]="item.productID">{{item.productName}}</option>
+                        </select>
+                        
+                    </th>
+                    <th>
+                        <div class="row">
+                            <button mat-mini-fab class="warning-color " (click)="onMinusClick()">
+                                <mdb-icon fas icon="minus" style="color: white;"></mdb-icon>
+                            </button>
+                            <h2> {{selectedItemweight}}g </h2>
+                            <button mat-mini-fab class="warning-color" (click)="onPlusClick()">
+                                <mdb-icon fas icon="plus" style="color: white;"></mdb-icon>
+                            </button>
+                        </div>
+                    </th>
+
+                    <th>
+                        <h1>Rs.{{selectedItemTotalPrice}}/=</h1>
+                    </th>
+                    <th>
+                        <button mdbBtn type="button" color="success" rounded="true" size="sm" (click)="addToTable()"
+                            mdbWavesEffect>Click to Add</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <div class="table-responsive " style="margin-top: 25px;">
+
+            <table mdbTable mdbTableScroll scrollY="true" class="table-fixed table-striped mx-auto  my-4 "
+                maxHeight="300" style="margin-top: 25px;">
+                <thead class="black white-text">
+                    <tr>
+                        <th class="text-center" *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr mdbTableCol *ngFor="let item of addedItems">
+                        
+                        <td><img class="img-responsive" style="max-height: 50px; max-width: 50px;" [src]="item.imgSrc"
+                                alt=" Prodcut image">
+                        </td>
+                        <td>{{item.productName}}</td>
+                        <td>{{item.weight}}g</td>
+                        <td>Rs.{{item.totalPricePerItem}}</td>
+                        <td class="text-center"><span class="table-remove">
+                                
+                                <mdb-icon fas icon="times" class="red-text pr-3" size="2x" mdbWavesEffect
+                                    (click)="onRemoveClick(item.productID)"></mdb-icon>
+                            </span>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <hr class="warning-color">
+
+        <div class="row text-left" style="margin-top: 20px; ">
+            <div class="col-md-12">
+                <section class="text-left pb-1 my-1">
+                    
+                    <h2 class="h1 ">Total :Rs {{packTotalPrice}}/= </h2>
+                    <button mdbBtn type="button" color="success" rounded="true" size="lg" mdbWavesEffect
+                        (click)="onConfirmClick()">Confirm & Update Package</button>
+                </section>
+            </div>
+        </div>
+        <hr>
+    </mdb-card-body>
+</mdb-card>
+
+
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        
+        <div class="modal-content text-center">
+           
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Are you sure?</p>
+            </div>
+
+            <div class="modal-body">
+                <mdb-icon fas icon="times" size="4x" class="animated rotateIn"></mdb-icon>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <a (click)="onDeleteClick()" mdbBtn color="danger" outline="true" class="waves-effect"
+                    mdbWavesEffect>Yes</a>
+                <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal"
+                    (click)="frame.hide()">No</a>
+            </div>
+        </div>
+    </div>
+</div> -->
