@@ -12,7 +12,7 @@ export class PackageItemNamingPipePipe implements PipeTransform {
   }
 
   transform(value: string,){
-    let x = this.items.find((a)=>a.productID===value);
+    let x = this.items.find((a)=>a._id===value);
     return x.productName
   }
 

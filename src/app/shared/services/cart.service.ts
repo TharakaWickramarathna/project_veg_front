@@ -16,8 +16,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CartService {
 
-    ADD_TO_CART_URL = 'http://localhost:5000/product/add-to-cart/5eaa93a300515853084feb3c/100';
-    VIEW_CART_URL = 'http://localhost:5000/product/cart-view';
+    private ADD_TO_CART_URL = 'http://localhost:5000/product/add-to-cart/5eaa93a300515853084feb3c/100';
+    private VIEW_CART_URL = 'http://localhost:5000/product/cart-view';
 
     onAdded = new EventEmitter<number>();
     onRemoved = new Subject<Cart[]>();

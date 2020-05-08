@@ -4,6 +4,7 @@ import { ProductPopupModalComponent } from './product-popup-modal/product-popup-
 import { ProductsService } from '../shared/services/products.service';
 import { Products } from '../shared/products.models';
 import { DataStorageService } from '../shared/services/data-storage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-products',
@@ -19,9 +20,12 @@ export class AllProductsComponent implements OnInit {
   modalRef: MDBModalRef;
 
   constructor(private modalService: MDBModalService,
-              private productService:ProductsService ) {
-
-                
+              private productService:ProductsService,
+              private http:HttpClient ) {
+                //this.productService.getProductsFromHttp();
+                this.productService.productsChanged.subscribe((products)=>{
+                  this.cards = products;
+                });
                }
 
   size :any = "col-md-3 pb-2";
@@ -67,6 +71,14 @@ export class AllProductsComponent implements OnInit {
 
 
     }
+
+    
+
+  
+ 
+  
+  
+
 
     
 

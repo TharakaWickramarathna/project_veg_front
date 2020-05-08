@@ -1,5 +1,5 @@
 export class Products{
-    productID : string;
+    _id : string;
     productName:string;
     unitPrice:number;
     minimumOrder:number;
@@ -9,7 +9,7 @@ export class Products{
 
 
     constructor(productID:string,productName:string,unitPrice:number,minimumOrder:number,category:string,availability:boolean,imgSrc:string){
-        this.productID=productID;
+        this._id=productID;
         this.productName=productName;
         this.unitPrice=unitPrice;
         this.minimumOrder = minimumOrder;
