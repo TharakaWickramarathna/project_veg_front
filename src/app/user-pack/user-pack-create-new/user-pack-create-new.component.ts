@@ -20,7 +20,20 @@ export class UserPackCreateNewComponent implements OnInit {
               private router:Router,
               private productService:ProductsService,
               private userPackageService:UserPackService,
-              private userPackageDescription:UserPackDescriptionService ) { }
+              private userPackageDescription:UserPackDescriptionService ) {
+                this.productService.productsChanged.subscribe((products)=>{
+                  this.items=products;
+                });
+               }
+
+
+              ngOnInit(): void {
+                //get all product array from product service
+                  this.items = this.productService.getProducts();
+                  console.log(this.items);
+                  
+              
+                }
 //define selecte item variables
   packageID:string;
   packageName:string;
@@ -37,12 +50,7 @@ export class UserPackCreateNewComponent implements OnInit {
   addedItems=[];
   headElements =   ['view' ,'name', 'qtn.', 'price', 'remove'];
 
-  ngOnInit(): void {
-  //get all product array from product service
-    this.items = this.productService.getProducts();
-    
-
-  }
+  
   
 
   selectOption(ID: string) {
@@ -50,9 +58,9 @@ export class UserPackCreateNewComponent implements OnInit {
   //recieve all the details related to selected item
     //console.log(ID);
     this.selectedID = ID
-    this.selectedItemName = this.items.find((x)=>x.productID===ID).productName;
-    this.selectedItemImg = this.items.find((x)=>x.productID===ID).imgSrc;
-    this.selectedItemUnitPrice = this.items.find((x)=>x.productID===ID).unitPrice;
+    this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
+    this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
+    this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
     this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
 
   }
@@ -78,6 +86,7 @@ export class UserPackCreateNewComponent implements OnInit {
 
 
   addToTable(){
+    //if item already exist in the table array
     if(this.getItem(this.selectedID)){
       let index = this.addedItems.indexOf(this.getItem(this.selectedID));
       this.addedItems[index].weight=this.addedItems[index].weight+this.selectedItemweight;
@@ -125,16 +134,27 @@ export class UserPackCreateNewComponent implements OnInit {
 
 //on confirm click
   onConfirmClick(){
-//generate random id for new package
-    this.packageID=uuidv4();
-//update userPackageService
-    this.userPackageService.addUserPackage(this.packageID,this.packageName,0);
-//update userPackageDescriptionservice
+// //generate random id for new package
+//     this.packageID=uuidv4();
+// //update userPackageService
+//     this.userPackageService.addUserPackage(this.packageID,this.packageName,0);
+// //update userPackageDescriptionservice
+//     for(let x of this.addedItems){
+//       this.userPackageDescription.addUserPackageDescription(this.packageID,x.productID,x.weight);
+//     }
+// //navigate to userpack page
+//     this.router.navigate(['userpacks','userpacklist']);
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+//filter essential properties
+  let selectedItems = [];
     for(let x of this.addedItems){
-      this.userPackageDescription.addUserPackageDescription(this.packageID,x.productID,x.weight);
+      selectedItems.push({_id:x.productID,quantity:x.weight});
     }
-//navigate to userpack page
-    this.router.navigate(['userpacks','userpacklist']);
+//call service method to send data to database
+  this.userPackageService.addNewUserPackage(this.packageName,selectedItems);
+  
+      
     
 }
 

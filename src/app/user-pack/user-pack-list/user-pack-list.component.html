@@ -63,21 +63,21 @@
               <mdb-card-body cascade="true" class="text-center pb-0">
                 <!--Title-->
                 <mdb-card-title>
-                  <h4 style="height: 30px;">{{packs.packageName}}</h4>
+                  <h4 style="height: 30px;">{{packs.name}}</h4>
                   <h5></h5>
                 </mdb-card-title>
 
                 <!--Text-->
                 <mdb-card-text>
                   <div class="container example-1 scrollbar-ripe-malinka">
-                    <div class="row" *ngFor="let packsDes of myPackDes | packageDescriptionPipe: packs.packageID">
-                      <div>{{packsDes.productID | packageItemNamingPipe}} </div>
+                    <div class="row" *ngFor="let packsDes of packs.products">
+                      <div>{{packsDes._id.productName}} </div>
                       <div> {{packsDes.quantity}}</div>
                     </div>
                   </div>
                 </mdb-card-text>
                 
-                  <a mdbBtn color="success" mdbWavesEffect (click)="openViewPackageModal(packs.packageID)"
+                  <a mdbBtn color="success" mdbWavesEffect (click)="openViewPackageModal(packs._id)"
                     class="w-100">ADD TO CART</a>
                   <!-- <a mdbBtn color="primary"  mdbWavesEffect >Edit</a> -->
                   <a mdbBtn color="success" mdbWavesEffect (click)="onEditClick(packs.packageID)" class="w-100">EDIT</a>

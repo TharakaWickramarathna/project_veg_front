@@ -21,6 +21,22 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
                 private userPackageService:UserPackService,
                 private userPackageDescriptionService:UserPackDescriptionService,
                 public mdRef:MDBModalService ) { }
+
+     ngOnInit(): void {
+// //get all product array from product service
+//     this.items = this.productService.getProducts();
+
+// //get id of package from routing
+//     this.packageID=this.route.snapshot.params['id'];
+//     console.log(this.packageID);
+// //get package name 
+//     this.packageName=this.userPackageService.getPackage(this.packageID).packageName;
+// //get existing items to array to display 
+//     this.loadExistingItemToDisplayArray();
+// //get total price of pack
+//     this.packTotalPrice=this.calculateTotalPrice(this.addedItems);
+
+  }
   
                 noClick = new EventEmitter<any>()
   //define selecte item variables
@@ -39,21 +55,7 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
   addedItems=[];
   headElements =   ['view' ,'name', 'qtn.', 'price', 'remove'];
 
-  ngOnInit(): void {
-//get all product array from product service
-    this.items = this.productService.getProducts();
-
-//get id of package from routing
-    this.packageID=this.route.snapshot.params['id'];
-    console.log(this.packageID);
-//get package name 
-    this.packageName=this.userPackageService.getPackage(this.packageID).packageName;
-//get existing items to array to display 
-    this.loadExistingItemToDisplayArray();
-//get total price of pack
-    this.packTotalPrice=this.calculateTotalPrice(this.addedItems);
-
-  }
+ 
 
 
 
@@ -62,9 +64,9 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 //recieve all the details related to selected item
   //console.log(ID);
   this.selectedID = ID
-  this.selectedItemName = this.items.find((x)=>x.productID===ID).productName;
-  this.selectedItemImg = this.items.find((x)=>x.productID===ID).imgSrc;
-  this.selectedItemUnitPrice = this.items.find((x)=>x.productID===ID).unitPrice;
+  this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
+  this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
+  this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
   this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
 
   }
@@ -139,11 +141,11 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 
 //on confirm click
   onConfirmClick(){
-    this.userPackageDescriptionService.updateUserPackageDescription(this.packageID,this.addedItems);
-//update name on
-    this.userPackageService.updatePackage(this.packageID,this.packageName);
-//navigate to userpack page
-    this.router.navigate(['userpacks','userpacklist']);
+//     this.userPackageDescriptionService.updateUserPackageDescription(this.packageID,this.addedItems);
+// //update name on
+//     this.userPackageService.updatePackage(this.packageID,this.packageName);
+// //navigate to userpack page
+//     this.router.navigate(['userpacks','userpacklist']);
   }
 
 
@@ -156,22 +158,22 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
     for(let y of loadedArray){
       this.addedItems.push({
         productID:y.productID,
-        productName:this.items.find((x)=>x.productID===y.productID).productName,
-        imgSrc:this.items.find((x)=>x.productID===y.productID).imgSrc,
+        productName:this.items.find((x)=>x._id===y.productID).productName,
+        imgSrc:this.items.find((x)=>x._id===y.productID).imgSrc,
         weight:y.quantity,
-        totalPricePerItem:this.items.find((x)=>x.productID===y.productID).unitPrice*(y.quantity/100),
+        totalPricePerItem:this.items.find((x)=>x._id===y.productID).unitPrice*(y.quantity/100),
       });
     }
   }
 
 
   onDeleteClick(){
-    this.userPackageService.removePackage(this.packageID);
-    this.userPackageDescriptionService.removePackageDescription(this.packageID);
+    // this.userPackageService.removePackage(this.packageID);
+    // this.userPackageDescriptionService.removePackageDescription(this.packageID);
 
 
-    // console.log(this.route.snapshot.params['id']);
-    this.router.navigate(['userpacks','userpacklist']);
+    // // console.log(this.route.snapshot.params['id']);
+    // this.router.navigate(['userpacks','userpacklist']);
   }
 
   }
