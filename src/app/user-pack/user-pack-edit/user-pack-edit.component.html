@@ -94,7 +94,7 @@
                         <th>
                           <select class="browser-default custom-select" (change)="selectOption($event.target.value)" >
                             <option selected>Select Product</option>
-                            <option *ngFor="let item of items" [value]="item.productID" >{{item.productName}}</option>
+                            <option *ngFor="let item of items" [value]="item._id" >{{item.productName}}</option>
                           </select>
                             <!-- <input mdbInput placeholder="Product name" type="text" id="formproductname" class="form-control"> -->
                         </th>

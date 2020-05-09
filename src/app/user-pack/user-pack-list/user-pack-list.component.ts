@@ -6,6 +6,7 @@ import { ViewPopUpModelComponent } from './../view-pop-up-model/view-pop-up-mode
 import { Component, OnInit, HostListener } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Router, ActivatedRoute } from '@angular/router';
+import { isObject } from 'util';
 
 
 @Component({
@@ -26,18 +27,32 @@ export class UserPackListComponent implements OnInit {
               
               //update userpack array
                 this.userPackageService.userPackChanged.subscribe((userpacks)=>{
-                  console.log(userpacks[0].name);
-                  this.myPacks = userpacks;
+                  // if(isObject(userpacks)){
+                  //   console.log("this one is a object" + userpacks);
+                  //   this.userPacksAvailability = true;
+                  //   this.myPacks=userpacks;
+                    
+                  // }
+                  // else{
+                  //   console.log("this one is a string");
+                  //   this.userPacksAvailability = false;
+                  //   this.myPacks=userpacks;
+                    
+                  // }
+                  this.spinner = false;
+                  this.myPacks=userpacks;
+                  
                 });
               }
+  spinner = true;
 
   pp='';
   modalRef: MDBModalRef;
   
-  
   myPacks: UserPackages[];
 
-  myPackDes: UserPackDescription[];
+  userPacksAvailability=true;
+
 
 
 
@@ -45,7 +60,10 @@ export class UserPackListComponent implements OnInit {
     //run fetching method on packservice
     this.userPackageService.fetchUserPackagesFromHttp("5ea91de10f61de375c8775b5");
 
-    this.myPacks = this.userPackageService.getProducts();
+    
+    if(this.userPackageService.getPackages()){
+      this.myPacks = this.userPackageService.getPackages();
+    }
     // this.myPackDes = this.userPackDescriptionService.getPackagesDescriptions();
 
    

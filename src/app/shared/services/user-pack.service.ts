@@ -2,6 +2,7 @@ import { UserPackages } from './../models/userPackage.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class UserPackService {
 
   userPackChanged = new Subject<UserPackages[]>();
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,
+              private router:Router) { 
     //this.fetchUserPackagesFromHttp();
   }
 
@@ -27,33 +29,56 @@ export class UserPackService {
 
 private GET_USERPACK_URL = "http://localhost:5000/favouritelist/";
 private CREATE_USER_PACK = "http://localhost:5000/favouritelist/add";
+private EDIT_USER_PACK = "http://localhost:5000/favouritelist/edit/";
+private DELETE_USER_PACK = "http://localhost:5000/favouritelist/delete/";
 
+//fetch data from database
 fetchUserPackagesFromHttp(u_id){
-  console.log(this.GET_USERPACK_URL+u_id);
+  //console.log(this.GET_USERPACK_URL+u_id);
   this.http.get<UserPackages[]>(this.GET_USERPACK_URL+u_id).subscribe((userpacks)=>{
     //console.log("Fetching all Userpack",userpacks);
     this.userpackages=userpacks;
     this.userPackChanged.next(this.userpackages.slice());
-  });
+    
+    });
 }
 
 
-getProducts(){
+getPackages(){
   return this.userpackages.slice();
 }
 
-getPackage(p:any){
+getPackage(p:string){
   return this.userpackages.find((package1)=>p===package1._id);
+  
 }
 
 //add new user packages to the database
-  addNewUserPackage(packageName:string,addedItems:any[]){
+async addNewUserPackage(packageName:string,addedItems:any[]){
     let products = addedItems;
     let clientID = "5ea91de10f61de375c8775b5";
     const userPackObj = {name:packageName,clientID:clientID,availability:true,products};
     //console.log(userPackObj);
-    this.http.post('http://localhost:5000/favouritelist/add',userPackObj).subscribe((x)=>{
+    this.http.post(this.CREATE_USER_PACK,userPackObj).subscribe((x)=>{
         console.log(x);
+        
+    });
+  }
+
+async editUserPackage(packageID:string,packageName:string,addedItems:any[]){
+    let products = addedItems;
+    let clientID = "5ea91de10f61de375c8775b5";
+    const userPackObj = {name:packageName,clientID:clientID,availability:true,products};
+    // console.log(this.EDIT_USER_PACK+packageID);
+    // console.log(userPackObj);
+    this.http.patch(this.EDIT_USER_PACK+packageID,userPackObj).subscribe((x)=>{
+        console.log(x);
+    });
+  }
+
+ async deleteUserPack(packageID){
+    this.http.delete(this.DELETE_USER_PACK+packageID).subscribe((x)=>{
+      console.log(x);
     });
   }
 

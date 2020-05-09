@@ -133,7 +133,7 @@ export class UserPackCreateNewComponent implements OnInit {
   }
 
 //on confirm click
-  onConfirmClick(){
+async onConfirmClick(){
 // //generate random id for new package
 //     this.packageID=uuidv4();
 // //update userPackageService
@@ -152,7 +152,10 @@ export class UserPackCreateNewComponent implements OnInit {
       selectedItems.push({_id:x.productID,quantity:x.weight});
     }
 //call service method to send data to database
-  this.userPackageService.addNewUserPackage(this.packageName,selectedItems);
+ await this.userPackageService.addNewUserPackage(this.packageName,selectedItems);
+//
+  this.router.navigate(['userpacks','userpacklist']);
+
   
       
     
