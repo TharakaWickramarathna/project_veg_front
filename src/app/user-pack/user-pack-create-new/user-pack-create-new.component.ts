@@ -50,9 +50,9 @@ export class UserPackCreateNewComponent implements OnInit {
   //recieve all the details related to selected item
     //console.log(ID);
     this.selectedID = ID
-    this.selectedItemName = this.items.find((x)=>x.productID===ID).productName;
-    this.selectedItemImg = this.items.find((x)=>x.productID===ID).imgSrc;
-    this.selectedItemUnitPrice = this.items.find((x)=>x.productID===ID).unitPrice;
+    this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
+    this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
+    this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
     this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
 
   }

@@ -31,7 +31,7 @@ export class ProductsService{
         
         this.http.get<Products[]>('http://localhost:5000/product/all').subscribe((products)=>{
         let recArray:Products[]=[];
-        console.log(products);
+        //console.log(products);
 
         // for(let i = 0;i<Object.keys(products).length;i++){
         //     let x=products[i];
@@ -40,7 +40,7 @@ export class ProductsService{
 
         // this.products = recArray;
         this.products = products;
-        console.log(products[0].productName);
+       // console.log(products[0].productName);
         this.productsChanged.next(this.products.slice());
     });
      

@@ -8,10 +8,10 @@
   </div>
   
         <div class="modal-body">
-          <div class="row" *ngFor="let listItem of productList | packageDescriptionPipe:content.packageID">
+          <div class="row" *ngFor="let listItem of productList">
             <div class="col-md-12  list-group-item clearfix">
               <div class="float-left">
-                <h2>{{listItem.productID | packageItemNamingPipe}}</h2>
+                <h2>{{listItem.productID }}</h2>
                 <p style="margin-top: 2px;">{{listItem.quantity}}g</p>
               </div>
                 <span class="float-right">

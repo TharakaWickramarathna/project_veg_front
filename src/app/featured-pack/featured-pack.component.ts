@@ -23,7 +23,11 @@ export class FeaturedPackComponent implements OnInit {
 
   constructor(private modalService: MDBModalService,
     private packageService: PackagesService,
-    private packageDescriptionService: PackageDescriptionService) { }
+    private packageDescriptionService: PackageDescriptionService) {
+      this.packageService.packageschanged.subscribe((packages)=>{
+        this.cards = packages;
+      });
+     }
 
   openPackageModal(packageID) {
     this.modalRef = this.modalService.show(PackPopupModalComponent, {
@@ -50,7 +54,6 @@ export class FeaturedPackComponent implements OnInit {
   cardsDes: PackageDescription[];
 
   result: PackageDescription[];
-
 
   ngOnInit(): void {
     this.cards = this.packageService.getProducts();

@@ -62,9 +62,9 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 //recieve all the details related to selected item
   //console.log(ID);
   this.selectedID = ID
-  this.selectedItemName = this.items.find((x)=>x.productID===ID).productName;
-  this.selectedItemImg = this.items.find((x)=>x.productID===ID).imgSrc;
-  this.selectedItemUnitPrice = this.items.find((x)=>x.productID===ID).unitPrice;
+  this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
+  this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
+  this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
   this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
 
   }
@@ -156,11 +156,12 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
     for(let y of loadedArray){
       this.addedItems.push({
         productID:y.productID,
-        productName:this.items.find((x)=>x.productID===y.productID).productName,
-        imgSrc:this.items.find((x)=>x.productID===y.productID).imgSrc,
+        productName:this.items.find((x)=>x._id===y.productID).productName,
+        imgSrc:this.items.find((x)=>x._id===y.productID).imgSrc,
         weight:y.quantity,
-        totalPricePerItem:this.items.find((x)=>x.productID===y.productID).unitPrice*(y.quantity/100),
+        totalPricePerItem:this.items.find((x)=>x._id===y.productID).unitPrice*(y.quantity/100),
       });
+
     }
   }
 

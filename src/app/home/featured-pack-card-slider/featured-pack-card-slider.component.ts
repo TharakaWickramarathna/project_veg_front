@@ -21,7 +21,11 @@ export class FeaturedPackCardSliderComponent implements OnInit {
   cards : Packages[];
 
   constructor(private router :Router,
-              private packageService:PackagesService){}
+              private packageService:PackagesService){
+                this.packageService.packageschanged.subscribe((packages)=>{
+                  this.cards = packages;
+                });
+              }
 
   slides: any = [[]];
   chunk(arr, chunkSize) {

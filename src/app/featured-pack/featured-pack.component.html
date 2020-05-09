@@ -19,25 +19,25 @@
                 
                 <mdb-card class="card text-center pb-0 rounded hoverable">
                   <div class="view overlay">
-                    <img class="card-img-top img-responsive" style="height: 150px;"
-                      [src]="card.imgSrc">
+                    <!-- <img class="card-img-top img-responsive" style="height: 150px;"
+                      [src]="card.imgSrc"> -->
                     <a>
                       <div class="mask rgba-white-slight"></div>
                     </a>
                   </div>
                   <mdb-card-body cascade="true" class="text-center pb-0">
                     <mdb-card-title>
-                      <h4 style="height: 30px;">{{card.packageName}}</h4>
+                      <h4 style="height: 30px;">{{card.name}}</h4>
                       <hr class="warning-color">
                     </mdb-card-title>
-                    <h4>Rs.{{card.price}} /=</h4>
+                    <h4>Rs.{{card.amount}} /=</h4>
           
                     <mdb-card-text >
                       <div class="container example-1 scrollbar-ripe-malinka">
-                        <div class="row" *ngFor="let item of cardsDes | packageDescriptionPipe:card.packageID">
-                          <div>{{item.productID | packageItemNamingPipe}} - </div>
-                          <div> {{item.quantity}}g</div>
-                        </div>
+                        <!-- <div class="row" *ngFor="let item of cardsDes "> -->
+                          <!-- <div>{{card.product}} - </div> -->
+                          <!-- <div> {{item.quantity}}g</div> -->
+                        <!-- </div> -->
                       </div>
                       
                     </mdb-card-text>

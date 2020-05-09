@@ -89,8 +89,8 @@ export class CartService {
         else {
             this.cartID = '001';
             this.isPack = 'p';
-            this.packageName = this.packageService.getPackage(packageID).packageName
-            this.imgSrc = this.packageService.getPackage(packageID).imgSrc;
+            this.packageName = this.packageService.getPackage(packageID).name
+            //this.imgSrc = this.packageService.getPackage(packageID).imgSrc;
             this.cart.push(new Cart(this.cartID, packageID, this.packageName, this.imgSrc, weight, price, this.isPack));
             this.onAdded.emit(this.getNumberOfElement());
         }

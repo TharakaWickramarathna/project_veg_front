@@ -32,7 +32,7 @@ export class PackPopupModalComponent implements OnInit {
     //get all product description
     this.productList=this.packageDesService.getPackagesDescriptions();
     //get package name related te the packageID
-    this.packageName=this.packageService.getPackage(this.content.packageID).packageName;
+    this.packageName=this.packageService.getPackage(this.content.packageID).name;
   }
 
   onClose(event: any) {
@@ -40,7 +40,7 @@ export class PackPopupModalComponent implements OnInit {
   }
 
   onClickAddToCart(){
-    const price = this.packageService.getPackage(this.content.packageID).price;
+    const price = this.packageService.getPackage(this.content.packageID).amount;
     this.cartService.addPackages(this.content.packageID,this.weight,price);
     this.modalRef.hide();
     
