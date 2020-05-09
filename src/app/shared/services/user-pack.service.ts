@@ -33,14 +33,9 @@ private EDIT_USER_PACK = "http://localhost:5000/favouritelist/edit/";
 private DELETE_USER_PACK = "http://localhost:5000/favouritelist/delete/";
 
 //fetch data from database
-fetchUserPackagesFromHttp(u_id){
+fetchUserPackages(u_id){
   //console.log(this.GET_USERPACK_URL+u_id);
-  this.http.get<UserPackages[]>(this.GET_USERPACK_URL+u_id).subscribe((userpacks)=>{
-    //console.log("Fetching all Userpack",userpacks);
-    this.userpackages=userpacks;
-    this.userPackChanged.next(this.userpackages.slice());
-    
-    });
+  return this.http.get<UserPackages[]>(this.GET_USERPACK_URL+u_id);
 }
 
 
@@ -54,44 +49,19 @@ getPackage(p:string){
 }
 
 //add new user packages to the database
-async addNewUserPackage(packageName:string,addedItems:any[]){
-    let products = addedItems;
-    let clientID = "5ea91de10f61de375c8775b5";
-    const userPackObj = {name:packageName,clientID:clientID,availability:true,products};
-    //console.log(userPackObj);
-    this.http.post(this.CREATE_USER_PACK,userPackObj).subscribe((x)=>{
-        console.log(x);
-        
-    });
+addNewUserPackage(clientID:string,packageName:string,products:any[]){
+    const userPackObj = {name:packageName,clientID:clientID,availability:true,products:products};
+    return this.http.post(this.CREATE_USER_PACK,userPackObj);
   }
-
-async editUserPackage(packageID:string,packageName:string,addedItems:any[]){
-    let products = addedItems;
-    let clientID = "5ea91de10f61de375c8775b5";
-    const userPackObj = {name:packageName,clientID:clientID,availability:true,products};
-    // console.log(this.EDIT_USER_PACK+packageID);
-    // console.log(userPackObj);
-    this.http.patch(this.EDIT_USER_PACK+packageID,userPackObj).subscribe((x)=>{
-        console.log(x);
-    });
+//edit userpck
+editUserPackage(clientID:string,packageID:string,packageName:string,products:any[]){
+    const userPackObj = {name:packageName,clientID:clientID,availability:true,products:products};
+    return this.http.patch(this.EDIT_USER_PACK+packageID,userPackObj);
   }
-
- async deleteUserPack(packageID){
-    this.http.delete(this.DELETE_USER_PACK+packageID).subscribe((x)=>{
-      console.log(x);
-    });
+//delete userpack
+deleteUserPack(packageID){
+    return this.http.delete(this.DELETE_USER_PACK+packageID);
   }
-
-// updatePackage(packageID,packageName){
-//   let ind =this.userpackages.indexOf(this.getPackage(packageID));
-//   this.userpackages[ind].packageName=packageName;
-// }
-
-// removePackage(packageID){
-//   let i = this.userpackages.indexOf(this.userpackages.find((x)=>x.packageID===packageID));
-//   this.userpackages.splice(i,1);
-// }
-
 
 
 }

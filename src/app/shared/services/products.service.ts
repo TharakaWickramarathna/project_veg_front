@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ProductsService{
 
+    GET_ALL_PRODUCT_URL = "http://localhost:5000/product/all";
+
     productsChanged = new Subject<Products[]>();
 
     private products :Products[]= [
@@ -44,6 +46,10 @@ export class ProductsService{
     });
      
 }
+//latest fetch product one
+        fetchProductsFromHttp(){
+            return this.http.get<Products[]>(this.GET_ALL_PRODUCT_URL);
+        }
 
 
     

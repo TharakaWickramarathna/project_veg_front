@@ -23,50 +23,23 @@ export class UserPackListComponent implements OnInit {
               private userPackageService:UserPackService,
               private userPackDescriptionService:UserPackDescriptionService,
               private route:ActivatedRoute) { 
-
-              
-              //update userpack array
-                this.userPackageService.userPackChanged.subscribe((userpacks)=>{
-                  // if(isObject(userpacks)){
-                  //   console.log("this one is a object" + userpacks);
-                  //   this.userPacksAvailability = true;
-                  //   this.myPacks=userpacks;
-                    
-                  // }
-                  // else{
-                  //   console.log("this one is a string");
-                  //   this.userPacksAvailability = false;
-                  //   this.myPacks=userpacks;
-                    
-                  // }
-                  this.spinner = false;
-                  this.myPacks=userpacks;
-                  
-                });
               }
-  spinner = true;
+  isLoading = false;
 
   pp='';
   modalRef: MDBModalRef;
   
   myPacks: UserPackages[];
-
-  userPacksAvailability=true;
-
+  userID="5eaf18c4d82e71543ce00229";
 
 
 
   ngOnInit(): void {
-    //run fetching method on packservice
-    this.userPackageService.fetchUserPackagesFromHttp("5ea91de10f61de375c8775b5");
-
-    
-    if(this.userPackageService.getPackages()){
-      this.myPacks = this.userPackageService.getPackages();
-    }
-    // this.myPackDes = this.userPackDescriptionService.getPackagesDescriptions();
-
-   
+    this.isLoading = true;
+    this.userPackageService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+      this.myPacks=userpacks;
+      this.isLoading=false;
+    });
   }
 
   
@@ -103,5 +76,8 @@ export class UserPackListComponent implements OnInit {
     console.log(packageID);
     this.modalRef.hide();
   }
+
+
+
 
 }

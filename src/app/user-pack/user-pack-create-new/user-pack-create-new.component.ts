@@ -21,19 +21,20 @@ export class UserPackCreateNewComponent implements OnInit {
               private productService:ProductsService,
               private userPackageService:UserPackService,
               private userPackageDescription:UserPackDescriptionService ) {
-                this.productService.productsChanged.subscribe((products)=>{
-                  this.items=products;
-                });
+
                }
 
 
-              ngOnInit(): void {
-                //get all product array from product service
-                  this.items = this.productService.getProducts();
-                  console.log(this.items);
+  ngOnInit(): void {
+//get all product array from product service
+  this.productService.fetchProductsFromHttp().subscribe((products)=>{
+    this.items = products;
+  });
+  
                   
               
-                }
+}
+clientID = "5eaf18c4d82e71543ce00229";
 //define selecte item variables
   packageID:string;
   packageName:string;
@@ -133,18 +134,7 @@ export class UserPackCreateNewComponent implements OnInit {
   }
 
 //on confirm click
-async onConfirmClick(){
-// //generate random id for new package
-//     this.packageID=uuidv4();
-// //update userPackageService
-//     this.userPackageService.addUserPackage(this.packageID,this.packageName,0);
-// //update userPackageDescriptionservice
-//     for(let x of this.addedItems){
-//       this.userPackageDescription.addUserPackageDescription(this.packageID,x.productID,x.weight);
-//     }
-// //navigate to userpack page
-//     this.router.navigate(['userpacks','userpacklist']);
-    //////////////////////////////////////////////////////////////////////////////////////////////
+onConfirmClick(){
 
 //filter essential properties
   let selectedItems = [];
@@ -152,10 +142,11 @@ async onConfirmClick(){
       selectedItems.push({_id:x.productID,quantity:x.weight});
     }
 //call service method to send data to database
- await this.userPackageService.addNewUserPackage(this.packageName,selectedItems);
-//
+this.userPackageService.addNewUserPackage(this.clientID,this.packageName,selectedItems).subscribe(()=>{
   this.router.navigate(['userpacks','userpacklist']);
+});
 
+  
   
       
     

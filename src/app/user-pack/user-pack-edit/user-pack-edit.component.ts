@@ -22,31 +22,36 @@ import { UserPackages } from 'src/app/shared/models/userPackage.model';
                 private userPackageService:UserPackService,
                 private userPackageDescriptionService:UserPackDescriptionService,
                 public mdRef:MDBModalService ) { 
-                  // this.userPackageService.fetchUserPackagesFromHttp("5ea91de10f61de375c8775b5");
-                  // this.userPackageService.userPackChanged.subscribe((userPacks)=>{
-                  //   this.loadExistingItemToDisplayArray();
-                  // })
-
                 }
 
      ngOnInit(): void {
-// //get all product array from product service
-       this.items = this.productService.getProducts();
 
-// //get id of package from routing
-     this.packageID=this.route.snapshot.params['id'];
-     console.log(this.packageID);
-//     console.log(this.packageID);
-// //get package name 
-       this.packageName=this.userPackageService.getPackage(this.packageID).name;
-// //get existing items to array to display 
-       this.loadExistingItemToDisplayArray();
-// //get total price of pack
-//     this.packTotalPrice=this.calculateTotalPrice(this.addedItems);
+//find related package id
+      this.packageID=this.route.snapshot.params['id'];
+
+//get all products for user to edit
+      this.productService.fetchProductsFromHttp().subscribe((products)=>{
+        this.items = products
+      });
+
+//fetch all the products that are in the pack  
+        this.userPackageService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+    //find name to related pack
+          this.packageName = userpacks.find((pack)=>{return pack._id===this.packageID;}).name;
+          let existingItems = userpacks.find((pack)=>{return pack._id===this.packageID;}).products;
+          this.loadExistingItemToDisplayArray(existingItems);
+
+    //calculate total price
+        this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
+      });
+
+
 
   }
   
                 noClick = new EventEmitter<any>()
+
+  userID = "5eaf18c4d82e71543ce00229";
   //define selecte item variables
   packageID:string;
   packageName:string;
@@ -150,32 +155,23 @@ import { UserPackages } from 'src/app/shared/models/userPackage.model';
   }
 
 //on confirm click
-async  onConfirmClick(){
-//     this.userPackageDescriptionService.updateUserPackageDescription(this.packageID,this.addedItems);
-// //update name on
-//     this.userPackageService.updatePackage(this.packageID,this.packageName);
-// //navigate to userpack page
-//     this.router.navigate(['userpacks','userpacklist']);
-    //filter essential properties
+onConfirmClick(){
   let selectedItems = [];
   for(let x of this.addedItems){
     selectedItems.push({_id:x.productID,quantity:x.weight});
   }
 //call service method to send data to database
-    await this.userPackageService.editUserPackage(this.packageID,this.packageName,selectedItems);
-//route to user pack list page
-    this.router.navigate(['userpacks','userpacklist']);
+    this.userPackageService.editUserPackage(this.userID,this.packageID,this.packageName,selectedItems).subscribe((x)=>{
+  //route to user pack list page
+      this.router.navigate(['userpacks','userpacklist']);
+    });
+    
   }
 
 
 
-  loadExistingItemToDisplayArray(){
-//get package description related to package
-    this.loadedArray=this.userPackageService.getPackage(this.packageID).products;
-    console.log(this.loadedArray);
-
-//push existing items to display array    
-    for(let y of this.loadedArray){
+  loadExistingItemToDisplayArray(existingItems){ 
+    for(let y of existingItems){
       this.addedItems.push({
         productID:y._id._id,
         productName:y._id.productName,
@@ -187,16 +183,14 @@ async  onConfirmClick(){
   }
 
 
-async  onDeleteClick(){
-    // this.userPackageService.removePackage(this.packageID);
-    // this.userPackageDescriptionService.removePackageDescription(this.packageID);
+onDeleteClick(){
 
+    this.userPackageService.deleteUserPack(this.packageID).subscribe((x)=>{
+      console.log(x);
+      this.router.navigate(['userpacks','userpacklist']);
+    });
 
-    // // console.log(this.route.snapshot.params['id']);
-    // this.router.navigate(['userpacks','userpacklist']);
-    await this.userPackageService.deleteUserPack(this.packageID);
-
-    this.router.navigate(['userpacks','userpacklist']);
+    
     
     
 

@@ -22,10 +22,6 @@ export class AllProductsComponent implements OnInit {
   constructor(private modalService: MDBModalService,
               private productService:ProductsService,
               private http:HttpClient ) {
-                //this.productService.getProductsFromHttp();
-                this.productService.productsChanged.subscribe((products)=>{
-                  this.cards = products;
-                });
                }
 
   size :any = "col-md-3 pb-2";
@@ -58,11 +54,14 @@ export class AllProductsComponent implements OnInit {
 
   
     ngOnInit() {
+
+      this.productService.fetchProductsFromHttp().subscribe((products)=>{
+        this.cards=products;
+      });
       
 
       //get products from product service
-    this.cards = this.productService.getProducts();
-
+    
       this.modalService.open.subscribe(() => console.log('open'));
       this.modalService.opened.subscribe(() => console.log('opened'));
       this.modalService.close.subscribe(() => console.log('close'));
