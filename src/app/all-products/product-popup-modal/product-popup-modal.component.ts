@@ -76,14 +76,14 @@ export class ProductPopupModalComponent implements OnInit {
     //   },
     //   err => console.log(err));
    // this.cartService.addItems(this.content.productID,this.weight,this.totalPrice);
-    this.modalRef.hide();
+    // this.modalRef.hide();
 
-    this.cartService.add_to_cart(this.content.productID,this.weight).toPromise()
-    .then(
-      cart => {
-        console.log(cart);
-      },
-      err => console.log(err));
+    // this.cartService.add_to_cart(this.content.productID,this.weight).toPromise()
+    // .then(
+    //   cart => {
+    //     console.log(cart);
+    //   },
+    //   err => console.log(err));
     
   }
 

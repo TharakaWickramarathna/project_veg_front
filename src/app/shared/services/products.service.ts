@@ -7,7 +7,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ProductsService{
 
-    GET_ALL_PRODUCT_URL = "http://localhost:5000/product/all";
+    private GET_ALL_PRODUCT_URL = "http://localhost:5000/product/all";
+    private GET_SPECIFIC_PRODUCT = "http://localhost:5000/product/";
+    private UPDATE_SPECIFIC_ITEM = "http://localhost:5000/product//update/"
 
     productsChanged = new Subject<Products[]>();
 
@@ -50,7 +52,14 @@ export class ProductsService{
         fetchProductsFromHttp(){
             return this.http.get<Products[]>(this.GET_ALL_PRODUCT_URL);
         }
-
+//fetch specific product from database
+        fetchProductFromHttp(productID){
+            return this.http.get<Products>(this.GET_SPECIFIC_PRODUCT+productID);
+        }
+//update specific products
+        updateSpecificProduct(productID,itemObject){
+            return this.http.post(this.UPDATE_SPECIFIC_ITEM+productID,itemObject);
+        }
 
     
 

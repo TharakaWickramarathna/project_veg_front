@@ -22,6 +22,7 @@ export class ViewPopUpModelComponent implements OnInit {
               private router:Router) { }
   
 ////get contents those are passing with modal
+  packageID :string;
   packageName:string;
   content:any;
   weight=1;
@@ -34,12 +35,20 @@ export class ViewPopUpModelComponent implements OnInit {
 
   ngOnInit(): void {
   //find related package id
-  // this.packageID=this.route.snapshot.params['id'];
+  this.packageID=this.content.packageID;
 
-  // //get all products for user to edit
-  //       this.productService.fetchProductsFromHttp().subscribe((products)=>{
-  //         this.specificProductList = products
-  //       });
+ 
+  this.userPackService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+    //find name to related pack
+          this.packageName = userpacks.find((pack)=>{return pack._id===this.packageID;}).name;
+    //add product list related to specific package
+          this.specificProductList = userpacks.find((pack)=>{return pack._id===this.packageID;}).products;
+          console.log(this.specificProductList);
+          
+
+    //calculate total price
+        this.totalAmount = this.calculateTotalPrice(this.specificProductList);
+      });
 }
 
   onClose(event: any) {
@@ -61,6 +70,15 @@ export class ViewPopUpModelComponent implements OnInit {
     this.router.navigate(['userpacks',this.content.packageID,'editpack']);
     this.modalRef.hide();
   }
+
+  //calculate total pack price 
+  calculateTotalPrice(specificProductList){
+    let total=0;
+    for(let x of specificProductList){
+      total = total+(x._id.unitPrice*x.quantity/100);
+    }
+    return total;
+    }
 
 
 
