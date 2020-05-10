@@ -15,17 +15,20 @@ import { UserPackDescription } from '../shared/userPackDescription.model';
 })
 export class FeaturedPackComponent implements OnInit {
 
-  productList: UserPackDescription[];
-
+ // productList: UserPackDescription[];
 
   pp = '';
   modalRef: MDBModalRef;
 
   constructor(private modalService: MDBModalService,
     private packageService: PackagesService,
-    private packageDescriptionService: PackageDescriptionService) { }
+    private packageDescriptionService: PackageDescriptionService) {
+      this.packageService.packageschanged.subscribe((packages)=>{
+        this.cards = packages;
+      });
+     }
 
-  openPackageModal(packageID) {
+  openPackageModal(_id) {
     this.modalRef = this.modalService.show(PackPopupModalComponent, {
       backdrop: true,
       keyboard: true,
@@ -38,7 +41,7 @@ export class FeaturedPackComponent implements OnInit {
       animated: true,
       data: {
         heading: 'Add to cart Confirmation',
-        content: { heading: 'Content heading', description: 'Content description', packageID: packageID }
+        content: { heading: 'Content heading', description: 'Content description', _id: _id }
       }
     });
 
@@ -47,14 +50,13 @@ export class FeaturedPackComponent implements OnInit {
   }
 
   cards: Packages[];
-  cardsDes: PackageDescription[];
+ // cardsDes: PackageDescription[];
 
   result: PackageDescription[];
 
-
   ngOnInit(): void {
     this.cards = this.packageService.getProducts();
-    this.cardsDes = this.packageDescriptionService.getPackagesDescriptions();
+  //  this.cardsDes = this.packageDescriptionService.getPackagesDescriptions();
 
   }
 

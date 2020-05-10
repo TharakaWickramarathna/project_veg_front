@@ -179,6 +179,7 @@ onConfirmClick(){
         weight:y.quantity,
         totalPricePerItem:(y._id.unitPrice)*(y.quantity/100),
       });
+
     }
   }
 

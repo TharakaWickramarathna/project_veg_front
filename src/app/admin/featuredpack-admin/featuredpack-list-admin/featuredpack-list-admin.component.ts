@@ -20,16 +20,16 @@ export class FeaturedpackListAdminComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit(): void {
-    this.packages = this.packageservive.getProducts();
-    this.packageDes = this.packagedesservice.getPackagesDescriptions();
+   // this.packages = this.packageservive.getProducts();
+   // this.packageDes = this.packagedesservice.getPackagesDescriptions();
   }
 
-  onCreateClick(){
-    this.router.navigate(['admin','featuredpacksadmin','createpack'])
-  }
+   onCreateClick(){
+  //   this.router.navigate(['admin','featuredpacksadmin','createpack'])
+   }
 
-  onClickPack(packageID){
-    this.router.navigate(['admin','featuredpacksadmin',packageID,'editPack']);
-  }
+   onClickPack(packageID){
+  //   this.router.navigate(['admin','featuredpacksadmin',packageID,'editPack']);
+   }
 
 }

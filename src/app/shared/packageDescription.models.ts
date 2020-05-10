@@ -1,11 +1,10 @@
+import { Products } from 'src/app/shared/products.models';
 export class PackageDescription{
-    packageID : string;
-    productID:string;
+    _id: Products;
     quantity:number;
 
-    constructor(packageID:string,productID:string,quantity:number){
-        this.packageID=packageID;
-        this.productID=productID;
+    constructor(_id:Products,quantity:number){
+        this._id= _id;
         this.quantity= quantity;
 
     }
