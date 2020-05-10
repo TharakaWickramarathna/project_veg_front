@@ -61,11 +61,10 @@ export class ItemCardSliderComponent implements OnInit {
         this.slides = this.chunk(this.cards, 4);
         this.onc=false;
       }
-      this.innerWidth = window.innerWidth;
     });
 
 
-    
+    this.innerWidth = window.innerWidth;
 
     
   }
