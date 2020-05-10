@@ -1,11 +1,12 @@
 import { UserPackDescriptionService } from './../../shared/services/user-pack-description.service';
 import { UserPackDescription } from './../../shared/userPackDescription.model';
 import { UserPackService } from './../../shared/services/user-pack.service';
-import { UserPackages } from './../../shared/userPacks.model';
+import { UserPackages } from './../../shared/models/userPackage.model';
 import { ViewPopUpModelComponent } from './../view-pop-up-model/view-pop-up-model/view-pop-up-model.component';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Router, ActivatedRoute } from '@angular/router';
+import { isObject } from 'util';
 
 
 @Component({
@@ -21,24 +22,24 @@ export class UserPackListComponent implements OnInit {
               private modalService: MDBModalService,
               private userPackageService:UserPackService,
               private userPackDescriptionService:UserPackDescriptionService,
-              private route:ActivatedRoute) { }
+              private route:ActivatedRoute) { 
+              }
+  isLoading = false;
 
   pp='';
   modalRef: MDBModalRef;
   
-  
   myPacks: UserPackages[];
-
-  myPackDes: UserPackDescription[];
+  userID="5eaf18c4d82e71543ce00229";
 
 
 
   ngOnInit(): void {
-
-    this.myPacks = this.userPackageService.getProducts();
-    this.myPackDes = this.userPackDescriptionService.getPackagesDescriptions();
-
-   
+    this.isLoading = true;
+    this.userPackageService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+      this.myPacks=userpacks;
+      this.isLoading=false;
+    });
   }
 
   
@@ -75,5 +76,8 @@ export class UserPackListComponent implements OnInit {
     console.log(packageID);
     this.modalRef.hide();
   }
+
+
+
 
 }

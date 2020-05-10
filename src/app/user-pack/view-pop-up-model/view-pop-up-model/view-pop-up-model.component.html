@@ -7,16 +7,16 @@
   </div>
   
         <div class="modal-body">
-          <div class="row" *ngFor="let listItem of specificProductList">
+          <div class="row" *ngFor="let productItem of specificProductList">
             <div class="col-md-12  list-group-item clearfix">
               <div class="float-left">
-                <h2>{{listItem.productID | packageItemNamingPipe}}</h2>
-                <p>{{listItem.quantity}}g</p>
-                <p>Rs {{listItem.quantity | packageItemTotalPricePerItemPipe:listItem.productID}}/=</p>
+                <h2>{{productItem._id.productName}}</h2>
+                <p>{{productItem.quantity}}g</p>
+                <!-- <p>Rs {{productItem.quantity}}/=</p> -->
 
               </div>
                 <span class="float-right">
-                  <img [src]="listItem.productID | packageItemImagePipe" alt="" style="width: auto;height: 70px;" class="img-responsive">
+                  <img [src]="productItem._id.imgSrc" alt="" style="width: auto;height: 70px;" class="img-responsive">
                 </span>
             </div>
           </div>
@@ -35,7 +35,7 @@
   <div class="container-fluid clearfix">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="float-left">Rs {{totalAmount}}/=</h2>
+      <h2 class="float-left">Rs{{totalAmount}}/=</h2>
     </div>
   </div>
 

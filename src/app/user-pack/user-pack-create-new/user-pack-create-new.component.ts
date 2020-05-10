@@ -20,7 +20,21 @@ export class UserPackCreateNewComponent implements OnInit {
               private router:Router,
               private productService:ProductsService,
               private userPackageService:UserPackService,
-              private userPackageDescription:UserPackDescriptionService ) { }
+              private userPackageDescription:UserPackDescriptionService ) {
+
+               }
+
+
+  ngOnInit(): void {
+//get all product array from product service
+  this.productService.fetchProductsFromHttp().subscribe((products)=>{
+    this.items = products;
+  });
+  
+                  
+              
+}
+clientID = "5eaf18c4d82e71543ce00229";
 //define selecte item variables
   packageID:string;
   packageName:string;
@@ -37,12 +51,7 @@ export class UserPackCreateNewComponent implements OnInit {
   addedItems=[];
   headElements =   ['view' ,'name', 'qtn.', 'price', 'remove'];
 
-  ngOnInit(): void {
-  //get all product array from product service
-    this.items = this.productService.getProducts();
-    
-
-  }
+  
   
 
   selectOption(ID: string) {
@@ -78,6 +87,7 @@ export class UserPackCreateNewComponent implements OnInit {
 
 
   addToTable(){
+    //if item already exist in the table array
     if(this.getItem(this.selectedID)){
       let index = this.addedItems.indexOf(this.getItem(this.selectedID));
       this.addedItems[index].weight=this.addedItems[index].weight+this.selectedItemweight;
@@ -124,17 +134,21 @@ export class UserPackCreateNewComponent implements OnInit {
   }
 
 //on confirm click
-  onConfirmClick(){
-//generate random id for new package
-    this.packageID=uuidv4();
-//update userPackageService
-    this.userPackageService.addUserPackage(this.packageID,this.packageName,0);
-//update userPackageDescriptionservice
+onConfirmClick(){
+
+//filter essential properties
+  let selectedItems = [];
     for(let x of this.addedItems){
-      this.userPackageDescription.addUserPackageDescription(this.packageID,x.productID,x.weight);
+      selectedItems.push({_id:x.productID,quantity:x.weight});
     }
-//navigate to userpack page
-    this.router.navigate(['userpacks','userpacklist']);
+//call service method to send data to database
+this.userPackageService.addNewUserPackage(this.clientID,this.packageName,selectedItems).subscribe(()=>{
+  this.router.navigate(['userpacks','userpacklist']);
+});
+
+  
+  
+      
     
 }
 

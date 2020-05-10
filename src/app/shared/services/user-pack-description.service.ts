@@ -1,12 +1,15 @@
 import { UserPackDescription } from './../userPackDescription.model';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserPackDescriptionService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { 
+    
+  }
 
   private userPackaDescription:UserPackDescription[] = [
     new UserPackDescription('1001','002',500),
@@ -29,6 +32,8 @@ export class UserPackDescriptionService {
     new UserPackDescription('1005','002',400) 
     
 ];
+
+
 
 getPackagesDescriptions(){
   return this.userPackaDescription.slice();

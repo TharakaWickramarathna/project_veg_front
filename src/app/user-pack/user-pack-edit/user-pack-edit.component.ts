@@ -6,6 +6,7 @@ import { UserPackService } from 'src/app/shared/services/user-pack.service';
 import { UserPackDescriptionService } from 'src/app/shared/services/user-pack-description.service';
 import { Products } from 'src/app/shared/products.models';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { UserPackages } from 'src/app/shared/models/userPackage.model';
 
 
   @Component({
@@ -20,9 +21,37 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
                 private productService:ProductsService,
                 private userPackageService:UserPackService,
                 private userPackageDescriptionService:UserPackDescriptionService,
-                public mdRef:MDBModalService ) { }
+                public mdRef:MDBModalService ) { 
+                }
+
+     ngOnInit(): void {
+
+//find related package id
+      this.packageID=this.route.snapshot.params['id'];
+
+//get all products for user to edit
+      this.productService.fetchProductsFromHttp().subscribe((products)=>{
+        this.items = products
+      });
+
+//fetch all the products that are in the pack  
+        this.userPackageService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+    //find name to related pack
+          this.packageName = userpacks.find((pack)=>{return pack._id===this.packageID;}).name;
+          let existingItems = userpacks.find((pack)=>{return pack._id===this.packageID;}).products;
+          this.loadExistingItemToDisplayArray(existingItems);
+
+    //calculate total price
+        this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
+      });
+
+
+
+  }
   
                 noClick = new EventEmitter<any>()
+
+  userID = "5eaf18c4d82e71543ce00229";
   //define selecte item variables
   packageID:string;
   packageName:string;
@@ -35,25 +64,13 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
   selectedItemTotalPrice:number = 0;
   packTotalPrice=0;
 
+  loadedArray:{_id:Products,quantity:number}[];
+
   items:Products[];
   addedItems=[];
   headElements =   ['view' ,'name', 'qtn.', 'price', 'remove'];
 
-  ngOnInit(): void {
-//get all product array from product service
-    this.items = this.productService.getProducts();
-
-//get id of package from routing
-    this.packageID=this.route.snapshot.params['id'];
-    console.log(this.packageID);
-//get package name 
-    this.packageName=this.userPackageService.getPackage(this.packageID).packageName;
-//get existing items to array to display 
-    this.loadExistingItemToDisplayArray();
-//get total price of pack
-    this.packTotalPrice=this.calculateTotalPrice(this.addedItems);
-
-  }
+ 
 
 
 
@@ -138,41 +155,46 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
   }
 
 //on confirm click
-  onConfirmClick(){
-    this.userPackageDescriptionService.updateUserPackageDescription(this.packageID,this.addedItems);
-//update name on
-    this.userPackageService.updatePackage(this.packageID,this.packageName);
-//navigate to userpack page
-    this.router.navigate(['userpacks','userpacklist']);
+onConfirmClick(){
+  let selectedItems = [];
+  for(let x of this.addedItems){
+    selectedItems.push({_id:x.productID,quantity:x.weight});
+  }
+//call service method to send data to database
+    this.userPackageService.editUserPackage(this.userID,this.packageID,this.packageName,selectedItems).subscribe((x)=>{
+  //route to user pack list page
+      this.router.navigate(['userpacks','userpacklist']);
+    });
+    
   }
 
 
 
-  loadExistingItemToDisplayArray(){
-//get package description related to package
-    let loadedArray=this.userPackageDescriptionService.getPackagesDescription(this.packageID);
-
-//push existing items to display array    
-    for(let y of loadedArray){
+  loadExistingItemToDisplayArray(existingItems){ 
+    for(let y of existingItems){
       this.addedItems.push({
-        productID:y.productID,
-        productName:this.items.find((x)=>x._id===y.productID).productName,
-        imgSrc:this.items.find((x)=>x._id===y.productID).imgSrc,
+        productID:y._id._id,
+        productName:y._id.productName,
+        imgSrc:y._id.imgSrc,
         weight:y.quantity,
-        totalPricePerItem:this.items.find((x)=>x._id===y.productID).unitPrice*(y.quantity/100),
+        totalPricePerItem:(y._id.unitPrice)*(y.quantity/100),
       });
 
     }
   }
 
 
-  onDeleteClick(){
-    this.userPackageService.removePackage(this.packageID);
-    this.userPackageDescriptionService.removePackageDescription(this.packageID);
+onDeleteClick(){
 
+    this.userPackageService.deleteUserPack(this.packageID).subscribe((x)=>{
+      console.log(x);
+      this.router.navigate(['userpacks','userpacklist']);
+    });
 
-    // console.log(this.route.snapshot.params['id']);
-    this.router.navigate(['userpacks','userpacklist']);
+    
+    
+    
+
   }
 
   }

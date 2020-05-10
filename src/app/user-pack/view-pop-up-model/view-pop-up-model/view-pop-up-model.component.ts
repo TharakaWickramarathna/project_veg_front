@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 import { UserPackService } from 'src/app/shared/services/user-pack.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { Router } from '@angular/router';
+import { UserPackageProductDescription } from 'src/app/shared/models/userPackageDescription.model';
 
 @Component({
   selector: 'app-view-pop-up-model',
@@ -29,22 +30,25 @@ export class ViewPopUpModelComponent implements OnInit {
 
   
   totalAmount:number;
-  specificProductList:UserPackDescription[];
+  specificProductList:UserPackageProductDescription[]=[];
 
   ngOnInit(): void {
   //filter related package description list
-    this.specificProductList = this.userPackDesService.getPackagesDescription(this.content.packageID);
+    this.specificProductList = this.userPackService.getPackage(this.content.packageID).products;
   //get package name
-    this.packageName = this.userPackService.getPackage(this.content.packageID).packageName;
+    this.packageName = this.userPackService.getPackage(this.content.packageID).name;
+    this.totalAmount = this.userPackService.getPackage(this.content.packageID).amount;
+    
+    
 
   //calculate total amount of pack
-    let x = 0;
-    for(const i of this.specificProductList){
-      let unitPrice=this.productService.getProduct(i.productID).unitPrice;
-      let quantity=i.quantity;
-      x=x+unitPrice*(quantity/100);
-    }
-    this.totalAmount=x;
+    // let x = 0;
+    // for(const i of this.specificProductList){
+    //   let unitPrice=this.productService.getProduct(i.productID).unitPrice;
+    //   let quantity=i.quantity;
+    //   x=x+unitPrice*(quantity/100);
+    // }
+    // this.totalAmount=x;
 }
 
   onClose(event: any) {

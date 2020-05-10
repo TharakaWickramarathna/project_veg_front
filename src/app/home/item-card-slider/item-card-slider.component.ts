@@ -30,10 +30,6 @@ export class ItemCardSliderComponent implements OnInit {
 
   constructor(private router :Router,
               private productService:ProductsService){
-                this.productService.productsChanged.subscribe((products)=>{
-                  this.cards = products;
-                  this.sizeResponse();
-                });
               }
 
   
@@ -50,11 +46,26 @@ export class ItemCardSliderComponent implements OnInit {
   ngOnInit() {
 
     //get products from product service
-    this.cards = this.productService.getProducts();
+    this.productService.fetchProductsFromHttp().subscribe((products)=>{
+      this.cards=products;
+
+      if(this.innerWidth<575){
+        this.slides = this.chunk(this.cards, 1);
+        this.onc=true;
+      }
+      if(this.innerWidth>=575 && this.innerWidth<768){
+        this.slides = this.chunk(this.cards, 2);
+        this.onc=false;
+      }
+      if(this.innerWidth>=768){
+        this.slides = this.chunk(this.cards, 4);
+        this.onc=false;
+      }
+      this.innerWidth = window.innerWidth;
+    });
 
 
-    this.innerWidth = window.innerWidth;
-    this.sizeResponse()
+    
 
     
   }
@@ -86,19 +97,6 @@ onViewMoreClicked(){
 }
 
 
-sizeResponse(){
-  if(this.innerWidth<575){
-    this.slides = this.chunk(this.cards, 1);
-    this.onc=true;
-  }
-  if(this.innerWidth>=575 && this.innerWidth<768){
-    this.slides = this.chunk(this.cards, 2);
-    this.onc=false;
-  }
-  if(this.innerWidth>=768){
-    this.slides = this.chunk(this.cards, 4);
-    this.onc=false;
-  }
-}
+
 
 }
