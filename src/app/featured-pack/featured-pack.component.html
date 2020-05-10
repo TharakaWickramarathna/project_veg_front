@@ -34,15 +34,15 @@
           
                     <mdb-card-text >
                       <div class="container example-1 scrollbar-ripe-malinka">
-                        <!-- <div class="row" *ngFor="let item of cardsDes "> -->
-                          <!-- <div>{{card.product}} - </div> -->
-                          <!-- <div> {{item.quantity}}g</div> -->
-                        <!-- </div> -->
+                        <div class="row" *ngFor="let item of card.products ">
+                          <div>{{item._id.productName}} -  </div>
+                          <div> {{item.quantity}} kg</div>
+                        </div>
                       </div>
                       
                     </mdb-card-text>
           
-                    <button mdbBtn color="success" (click) = "openPackageModal(card.packageID)">VIEW ADD TO CART <mdb-icon fas icon="cart-plus" style="margin-left: 10px;"></mdb-icon></button>
+                    <button mdbBtn color="success" (click) = "openPackageModal(card._id)">VIEW ADD TO CART <mdb-icon fas icon="cart-plus" style="margin-left: 10px;"></mdb-icon></button>
                   
                   </mdb-card-body>
                 </mdb-card>

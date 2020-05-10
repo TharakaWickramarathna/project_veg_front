@@ -60,7 +60,7 @@ export class ViewPopUpModelComponent implements OnInit {
   }
 
   onAddToCartClick(){
-    this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
+   // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
     this.modalRef.hide();
   }
 

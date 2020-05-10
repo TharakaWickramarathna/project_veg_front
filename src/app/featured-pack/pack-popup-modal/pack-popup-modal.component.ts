@@ -1,9 +1,9 @@
+import { Packages } from './../../shared/packages.model';
 // import { PackageDescriptionService } from './../../shared/services/package-description.service';
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { PackagesService } from 'src/app/shared/services/packages.service';
-import { PackageDescriptionService } from 'src/app/shared/services/package-description.service';
 import { PackageDescription } from 'src/app/shared/packageDescription.models';
 
 @Component({
@@ -14,13 +14,12 @@ import { PackageDescription } from 'src/app/shared/packageDescription.models';
 export class PackPopupModalComponent implements OnInit {
 
 
-  productList:PackageDescription[];
+  productList:Packages[];
   packageName:string;
 
   constructor(public modalRef: MDBModalRef, 
               private cartService:CartService, 
               private packageService:PackagesService,
-              private packageDesService:PackageDescriptionService
     // private packageDescriptionService:PackageDescriptionService
     ) {}
 
@@ -30,9 +29,9 @@ export class PackPopupModalComponent implements OnInit {
 
   ngOnInit(): void {
     //get all product description
-    this.productList=this.packageDesService.getPackagesDescriptions();
+    this.productList=this.packageService.getProducts();
     //get package name related te the packageID
-    this.packageName=this.packageService.getPackage(this.content.packageID).name;
+    this.packageName=this.packageService.getPackage(this.content._id).name;
   }
 
   onClose(event: any) {
@@ -40,12 +39,11 @@ export class PackPopupModalComponent implements OnInit {
   }
 
   onClickAddToCart(){
-    const price = this.packageService.getPackage(this.content.packageID).amount;
-    this.cartService.addPackages(this.content.packageID,this.weight,price);
+    const price = this.packageService.getPackage(this.content._id).amount;
+    //this.cartService.addPackages(this.content.packageID,this.weight,price);
     this.modalRef.hide();
     
-    
-    
+  
   }
 
 }

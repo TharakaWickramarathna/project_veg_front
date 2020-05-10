@@ -6,8 +6,6 @@ import { Products } from 'src/app/shared/products.models';
 import { CartService } from 'src/app/shared/services/cart.service';
 
 
-
-
 @Component({
   selector: 'app-product-popup-modal',
   templateUrl: './product-popup-modal.component.html',
@@ -68,7 +66,7 @@ export class ProductPopupModalComponent implements OnInit {
 
 
   onClickAddToCart(){
-    this.cartService.addItems(this.content.productID,this.weight,this.totalPrice);
+   // this.cartService.addItems(this.content.productID,this.weight,this.totalPrice);
     this.modalRef.hide();
 
     this.cartService.add_to_cart(this.content.productID,this.weight).toPromise()

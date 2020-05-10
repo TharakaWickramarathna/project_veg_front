@@ -28,7 +28,7 @@ export class FloatBtnComponent implements OnInit {
 
   ngOnInit(): void {
   //get notification count 
-    this.notificationCount=this.cartService.getNumberOfElement();
+    //this.notificationCount=this.cartService.getNumberOfElement();
   }
 
   onbtnClicked(){

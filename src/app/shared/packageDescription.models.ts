@@ -3,8 +3,8 @@ export class PackageDescription{
     _id: Products;
     quantity:number;
 
-    constructor(products:Products,quantity:number){
-        this._id= products;
+    constructor(_id:Products,quantity:number){
+        this._id= _id;
         this.quantity= quantity;
 
     }
