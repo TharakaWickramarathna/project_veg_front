@@ -1,5 +1,4 @@
 import { UserPackDescriptionService } from './../../shared/services/user-pack-description.service';
-import { UserPackDescription } from './../../shared/userPackDescription.model';
 import { UserPackService } from './../../shared/services/user-pack.service';
 import { UserPackages } from './../../shared/models/userPackage.model';
 import { ViewPopUpModelComponent } from './../view-pop-up-model/view-pop-up-model/view-pop-up-model.component';

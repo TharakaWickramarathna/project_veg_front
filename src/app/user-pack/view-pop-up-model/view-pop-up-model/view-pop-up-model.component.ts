@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
-import { UserPackDescription } from 'src/app/shared/userPackDescription.model';
 import { UserPackDescriptionService } from 'src/app/shared/services/user-pack-description.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { UserPackService } from 'src/app/shared/services/user-pack.service';
@@ -22,10 +21,11 @@ export class ViewPopUpModelComponent implements OnInit {
               private cartService:CartService,
               private router:Router) { }
   
-//get contents those are passing with modal
+////get contents those are passing with modal
   packageName:string;
   content:any;
   weight=1;
+  userID="5eaf18c4d82e71543ce00229";
 
 
   
@@ -33,22 +33,13 @@ export class ViewPopUpModelComponent implements OnInit {
   specificProductList:UserPackageProductDescription[]=[];
 
   ngOnInit(): void {
-  //filter related package description list
-    this.specificProductList = this.userPackService.getPackage(this.content.packageID).products;
-  //get package name
-    this.packageName = this.userPackService.getPackage(this.content.packageID).name;
-    this.totalAmount = this.userPackService.getPackage(this.content.packageID).amount;
-    
-    
+  //find related package id
+  // this.packageID=this.route.snapshot.params['id'];
 
-  //calculate total amount of pack
-    // let x = 0;
-    // for(const i of this.specificProductList){
-    //   let unitPrice=this.productService.getProduct(i.productID).unitPrice;
-    //   let quantity=i.quantity;
-    //   x=x+unitPrice*(quantity/100);
-    // }
-    // this.totalAmount=x;
+  // //get all products for user to edit
+  //       this.productService.fetchProductsFromHttp().subscribe((products)=>{
+  //         this.specificProductList = products
+  //       });
 }
 
   onClose(event: any) {
@@ -60,8 +51,8 @@ export class ViewPopUpModelComponent implements OnInit {
   }
 
   onAddToCartClick(){
-    this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
-    this.modalRef.hide();
+    // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
+    // this.modalRef.hide();
   }
 
   onEditClick(){
