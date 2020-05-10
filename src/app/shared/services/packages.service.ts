@@ -12,6 +12,7 @@ export class PackagesService {
   private GET_PACKAGES = "http://localhost:5000/suggestedlist/view";
   private EDIT_PACKAGES = "http://localhost:5000/suggestedlist/edit/";
   private ADD_PACKAGE = "http://localhost:5000/suggestedlist/add/";
+  private DELETE_PACKAGE = "http://localhost:5000/suggestedlist/delete/"; 
 
   private packages:Packages[] = [];
 
@@ -42,10 +43,11 @@ addFeaturePackage(name:string,discount:number,availability:boolean,products:any[
 
 updatePackage(_id:string, name:string, discount:number, availability:boolean, products:any[]){
   const newupdatedPackage = {name:name,discount:discount,availability:true,products:products};
-  return this.http.patch(this.EDIT_PACKAGES,newupdatedPackage);
+  return this.http.patch(this.EDIT_PACKAGES+_id,newupdatedPackage);
 }
 
-removePackage(packageID){
+removePackage(_id){ 
+  return this.http.delete(this.DELETE_PACKAGE+_id);
  // let i = this.packages.indexOf(this.packages.find((x)=>x.packageID===packageID));
  // this.packages.splice(i,1);
 }

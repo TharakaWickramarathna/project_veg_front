@@ -155,7 +155,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
       newItems.push({_id:x.productID,quantity:x.weight});
     }
   //call service method to send data to database
-      this.packageservice.updatePackage(this.packageID,this.packageName,this.packDiscount,true,newItems).subscribe((x)=>{
+      this.packageservice.updatePackage(this.packageID,this.packageName,this.packDiscount,true,newItems).subscribe(()=>{
   //   //navigate to userpack page
     this.router.navigate(['admin', 'featuredpacksadmin',]);
   });
@@ -176,6 +176,9 @@ export class FeaturedpackEditAdminComponent implements OnInit {
    }
 
    onDeleteClick() {
+    this.packageservice.removePackage(this.packageID).subscribe(()=>{
+      this.router.navigate(['admin', 'featuredpacksadmin',]);
+    });
   //   this.packageservice.removePackage(this.packageID);
   //   this.packageDesservice.removePackageDescription(this.packageID);
   //   this.router.navigate(['admin', 'featuredpacksadmin',]);
