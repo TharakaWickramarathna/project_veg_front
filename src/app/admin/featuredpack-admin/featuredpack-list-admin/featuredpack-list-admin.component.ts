@@ -28,7 +28,7 @@ export class FeaturedpackListAdminComponent implements OnInit {
  }
 
    onCreateClick(){
-    // this.router.navigate(['admin','featuredpacksadmin','createpack'])
+     this.router.navigate(['admin','featuredpacksadmin','createpack'])
    }
 
    onClickPack(_id){

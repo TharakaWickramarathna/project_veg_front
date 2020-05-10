@@ -11,6 +11,7 @@ export class PackagesService {
 
   private GET_PACKAGES = "http://localhost:5000/suggestedlist/view";
   private EDIT_PACKAGES = "http://localhost:5000/suggestedlist/edit/";
+  private ADD_PACKAGE = "http://localhost:5000/suggestedlist/add/";
 
   private packages:Packages[] = [];
 
@@ -33,13 +34,15 @@ getPackage(p:any){
   return this.packages.find((package1)=>p===package1._id);
 }
 
-addFeaturePackage(packageID,packageName,price,imgsrc){
+addFeaturePackage(name:string,discount:number,availability:boolean,products:any[]){
  // this.packages.push(new Packages(packageID,packageName,price,imgsrc));
+ const addnewpackage = {name:name,discount:discount,availability:true,products:products};
+ return this.http.post(this.ADD_PACKAGE,addnewpackage);
 }
 
 updatePackage(_id:string, name:string, discount:number, availability:boolean, products:any[]){
   const newupdatedPackage = {name:name,discount:discount,availability:true,products:products};
-  return this.http.patch(this.EDIT_PACKAGES+_id,newupdatedPackage);
+  return this.http.patch(this.EDIT_PACKAGES,newupdatedPackage);
 }
 
 removePackage(packageID){

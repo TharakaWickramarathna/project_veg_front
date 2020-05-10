@@ -91,7 +91,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
    }
 
    onMinusClick() {
-     if (this.selectedItemweight > 200) {
+     if (this.selectedItemweight > 100) {
     //decrease weight
     this.selectedItemweight = this.selectedItemweight - 100;
     //update total weigt according to icrease weight
