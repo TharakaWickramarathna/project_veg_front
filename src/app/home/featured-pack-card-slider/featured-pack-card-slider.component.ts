@@ -22,9 +22,6 @@ export class FeaturedPackCardSliderComponent implements OnInit {
 
   constructor(private router :Router,
               private packageService:PackagesService){
-                this.packageService.packageschanged.subscribe((packages)=>{
-                  this.cards = packages;
-                });
               }
 
   slides: any = [[]];
@@ -37,25 +34,26 @@ export class FeaturedPackCardSliderComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.cards = this.packageService.getProducts();
+    this.packageService.getProductsFromHttp().subscribe((packages)=>{
+      this.cards = packages;
 
-
-    this.innerWidth = 
-    window.innerWidth;
-
-    if(this.innerWidth<575){
-      this.slides = this.chunk(this.cards, 1);
-      this.onc=true;
-    }
-    if(this.innerWidth>=575 && this.innerWidth<768){
-      this.slides = this.chunk(this.cards, 2);
-      this.onc=false;
-    }
-    if(this.innerWidth>=768){
-      this.slides = this.chunk(this.cards, 4);
-      this.onc=false;
-    }
-
+      this.innerWidth = 
+      window.innerWidth;
+  
+      if(this.innerWidth<575){
+        this.slides = this.chunk(this.cards, 1);
+        this.onc=true;
+      }
+      if(this.innerWidth>=575 && this.innerWidth<768){
+        this.slides = this.chunk(this.cards, 2);
+        this.onc=false;
+      }
+      if(this.innerWidth>=768){
+        this.slides = this.chunk(this.cards, 4);
+        this.onc=false;
+      }
+    });
+    //this.cards = this.packageService.getProducts();
     
   }
 

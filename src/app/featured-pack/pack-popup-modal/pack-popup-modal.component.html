@@ -4,24 +4,23 @@
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">×</span>
     </button>
-    <h2 class="modal-title w-100" id="myModalLabel">{{packageName}}</h2>
+    <h2 class="modal-title w-100" id="myModalLabel">{{content.name}}</h2>
   </div>
   
-        <div class="modal-body" *ngFor="let listItem of productList">
-          <div class="row" *ngFor="let listItems of listItem.products">
+        <div class="modal-body" >
+          <div class="row" *ngFor="let listItem of content.products">
+            <!-- <div class="row"> -->
             <div class="col-md-12  list-group-item clearfix">
-              <div class="float-left">
-                <h2>{{listItems._id.productName}}</h2>
-                <p style="margin-top: 2px;">{{listItems.quantity}} kg</p>
+              <div class="float-left" >
+                <h2>{{listItem._id.productName}}</h2>
+                <p style="margin-top: 2px;">{{listItem.quantity}} kg</p>
               </div>
                 <span class="float-right">
-                  <img [src]="listItems._id.imgSrc " alt="" style="width: auto;height: 70px;" class="img-responsive">
+                  <img [src]="listItem._id.imgSrc " alt="" style="width: auto;height: 70px;" class="img-responsive">
                 </span>
             </div>
           </div>
         </div>
-
-
           <div class="row ">
     
 

@@ -29,9 +29,11 @@ export class PackPopupModalComponent implements OnInit {
 
   ngOnInit(): void {
     //get all product description
-    this.productList=this.packageService.getProducts();
+    this.packageService.getProductsFromHttp().subscribe((packages)=>{
+      this.productList = packages;
+    });
     //get package name related te the packageID
-    this.packageName=this.packageService.getPackage(this.content._id).name;
+    //this.packageName=this.packageService.getPackage(this.content._id).name;
   }
 
   onClose(event: any) {

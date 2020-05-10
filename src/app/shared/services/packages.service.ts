@@ -8,31 +8,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PackagesService {
 
+  private GET_PACKAGES = "http://localhost:5000/suggestedlist/view";
+
   private packages:Packages[] = [];
 
   packageschanged = new Subject<Packages[]>();
 
   constructor(private http:HttpClient){
-    this.getProductsFromHttp();
+   // this.getProductsFromHttp();
 }
 
 getProductsFromHttp(){
     
-    this.http.get<Packages[]>('http://localhost:5000/suggestedlist/view').subscribe((packages)=>{
-    //let recArray:Packages[]=[];
-    console.log(packages);
-
-    // for(let i = 0;i<Object.keys(products).length;i++){
-    //     let x=products[i];
-    //     recArray.push(new Products(x._id,x.name,x.pricePerUnit,x.minOrder,x.catagory,x.availability,"sss"));
-    // }
-
-    // this.products = recArray;
-    this.packages = packages;
-   // console.log(products[0].productName);
-    this.packageschanged.next(this.packages.slice());
-});
-
+  return this.http.get<Packages[]>(this.GET_PACKAGES);
 }
 
 getProducts(){
