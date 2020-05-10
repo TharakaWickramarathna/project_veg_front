@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
-import { UserPackDescription } from 'src/app/shared/userPackDescription.model';
 import { UserPackDescriptionService } from 'src/app/shared/services/user-pack-description.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { UserPackService } from 'src/app/shared/services/user-pack.service';
@@ -22,10 +21,12 @@ export class ViewPopUpModelComponent implements OnInit {
               private cartService:CartService,
               private router:Router) { }
   
-//get contents those are passing with modal
+////get contents those are passing with modal
+  packageID :string;
   packageName:string;
   content:any;
   weight=1;
+  userID="5eaf18c4d82e71543ce00229";
 
 
   
@@ -33,22 +34,21 @@ export class ViewPopUpModelComponent implements OnInit {
   specificProductList:UserPackageProductDescription[]=[];
 
   ngOnInit(): void {
-  //filter related package description list
-    this.specificProductList = this.userPackService.getPackage(this.content.packageID).products;
-  //get package name
-    this.packageName = this.userPackService.getPackage(this.content.packageID).name;
-    this.totalAmount = this.userPackService.getPackage(this.content.packageID).amount;
-    
-    
+  //find related package id
+  this.packageID=this.content.packageID;
 
-  //calculate total amount of pack
-    // let x = 0;
-    // for(const i of this.specificProductList){
-    //   let unitPrice=this.productService.getProduct(i.productID).unitPrice;
-    //   let quantity=i.quantity;
-    //   x=x+unitPrice*(quantity/100);
-    // }
-    // this.totalAmount=x;
+ 
+  this.userPackService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
+    //find name to related pack
+          this.packageName = userpacks.find((pack)=>{return pack._id===this.packageID;}).name;
+    //add product list related to specific package
+          this.specificProductList = userpacks.find((pack)=>{return pack._id===this.packageID;}).products;
+          console.log(this.specificProductList);
+          
+
+    //calculate total price
+        this.totalAmount = this.calculateTotalPrice(this.specificProductList);
+      });
 }
 
   onClose(event: any) {
@@ -60,6 +60,8 @@ export class ViewPopUpModelComponent implements OnInit {
   }
 
   onAddToCartClick(){
+    // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
+    // this.modalRef.hide();
    // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
     this.modalRef.hide();
   }
@@ -68,6 +70,15 @@ export class ViewPopUpModelComponent implements OnInit {
     this.router.navigate(['userpacks',this.content.packageID,'editpack']);
     this.modalRef.hide();
   }
+
+  //calculate total pack price 
+  calculateTotalPrice(specificProductList){
+    let total=0;
+    for(let x of specificProductList){
+      total = total+(x._id.unitPrice*x.quantity/100);
+    }
+    return total;
+    }
 
 
 

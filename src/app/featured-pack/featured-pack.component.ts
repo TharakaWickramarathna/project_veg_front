@@ -5,7 +5,6 @@ import { Component, OnInit} from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { PackPopupModalComponent } from './pack-popup-modal/pack-popup-modal.component';
 import { PackagesService } from '../shared/services/packages.service';
-import { UserPackDescription } from '../shared/userPackDescription.model';
 
 
 @Component({

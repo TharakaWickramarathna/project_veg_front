@@ -15,7 +15,9 @@ export class ProductListAdminComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    this.productsService.fetchProductsFromHttp().subscribe((products)=>{
+      this.products=products;
+    });
   }
 
   onClickItem(productID){
