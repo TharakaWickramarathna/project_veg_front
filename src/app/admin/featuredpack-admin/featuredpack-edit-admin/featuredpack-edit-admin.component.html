@@ -29,7 +29,7 @@
                     <th>
                         <select class="browser-default custom-select" (change)="selectOption($event.target.value)">
                             <option selected>Select Product</option>
-                            <option *ngFor="let item of items" [value]="item.productID">{{item.productName}}</option>
+                            <option *ngFor="let item of items" [value]="item._id">{{item.productName}}</option>
                         </select>
                         
                     </th>
@@ -81,7 +81,7 @@
                         <td class="text-center"><span class="table-remove">
                                 
                                 <mdb-icon fas icon="times" class="red-text pr-3" size="2x" mdbWavesEffect
-                                    (click)="onRemoveClick(item.productID)"></mdb-icon>
+                                    (click)="onRemoveClick(item._id)"></mdb-icon>
                             </span>
                         </td>
 
@@ -95,7 +95,7 @@
 
             <div class="float-left">
                 <div class="md-form">
-                    <input mdbInput type="number" id="form4" class="form-control" [(ngModel)]="packageDiscount">
+                    <input mdbInput type="number" id="form4" class="form-control" [(ngModel)]="packDiscount">
                     <label for="form4">Enter Package Discount</label>
                 </div>
             </div>

@@ -34,5 +34,4 @@ export class FeaturedpackListAdminComponent implements OnInit {
    onClickPack(_id){
      this.router.navigate(['admin','featuredpacksadmin',_id,'editPack']);
    }
-
 }

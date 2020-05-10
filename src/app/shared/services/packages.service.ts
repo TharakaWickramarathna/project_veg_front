@@ -1,3 +1,4 @@
+import { Products } from './../products.models';
 import { Packages } from './../packages.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class PackagesService {
 
   private GET_PACKAGES = "http://localhost:5000/suggestedlist/view";
+  private EDIT_PACKAGES = "http://localhost:5000/suggestedlist/edit/";
 
   private packages:Packages[] = [];
 
@@ -35,9 +37,9 @@ addFeaturePackage(packageID,packageName,price,imgsrc){
  // this.packages.push(new Packages(packageID,packageName,price,imgsrc));
 }
 
-updatePackage(packageID,packageName){
- // let ind =this.packages.indexOf(this.getPackage(packageID));
- // this.packages[ind].packageName=packageName;
+updatePackage(_id:string, name:string, discount:number, availability:boolean, products:any[]){
+  const newupdatedPackage = {name:name,discount:discount,availability:true,products:products};
+  return this.http.patch(this.EDIT_PACKAGES+_id,newupdatedPackage);
 }
 
 removePackage(packageID){
@@ -45,5 +47,6 @@ removePackage(packageID){
  // this.packages.splice(i,1);
 }
 
-
 }
+
+
