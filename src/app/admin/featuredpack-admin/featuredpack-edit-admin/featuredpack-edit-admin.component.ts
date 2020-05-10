@@ -76,7 +76,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
       this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
       this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
       this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
-      this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/1000);
+      this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
 
    }
 
@@ -87,7 +87,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
     this.selectedItemweight = this.selectedItemweight + 100;
 
   //   //update total weigt according to icrease weight
-     this.selectedItemTotalPrice = this.selectedItemUnitPrice * (this.selectedItemweight / 1000);
+     this.selectedItemTotalPrice = this.selectedItemUnitPrice * (this.selectedItemweight / 100);
    }
 
    onMinusClick() {
@@ -95,7 +95,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
     //decrease weight
     this.selectedItemweight = this.selectedItemweight - 100;
     //update total weigt according to icrease weight
-      this.selectedItemTotalPrice = this.selectedItemUnitPrice * (this.selectedItemweight / 1000);
+      this.selectedItemTotalPrice = this.selectedItemUnitPrice * (this.selectedItemweight / 100);
     }
    }
 
