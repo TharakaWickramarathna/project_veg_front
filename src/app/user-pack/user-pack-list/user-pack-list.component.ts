@@ -38,6 +38,8 @@ export class UserPackListComponent implements OnInit {
     this.userPackageService.fetchUserPackages(this.userID).subscribe((userpacks)=>{
       this.myPacks=userpacks;
       this.isLoading=false;
+    },err => {
+      console.log(err);
     });
   }
 
