@@ -21,9 +21,8 @@ export class FeaturedpackCreateAdminComponent implements OnInit {
 
     packageID:string;
     packageName:string;
-    packageDiscount: number;
-  
-    selectedItemweight = 200;
+    packDiscount: number;
+    selectedItemweight = 100;
     selectedID:string;
     selectedItemName:string;
     selectedItemImg:string;
@@ -37,81 +36,83 @@ export class FeaturedpackCreateAdminComponent implements OnInit {
     headElements =   ['view' ,'name', 'qtn.', 'price', 'availibility','remove'];
 
   ngOnInit(): void {
-   // this.items = this.productService.getProducts();
+    this.productService.fetchProductsFromHttp().subscribe((products)=>{
+      this.items = products;
+    });
   }
 
    selectOption(ID: string) {
 
   //   //recieve all the details related to selected item
-  //     this.selectedID = ID
-  //     this.selectedItemName = this.items.find((x)=>x.productID===ID).productName;
-  //     this.selectedItemImg = this.items.find((x)=>x.productID===ID).imgSrc;
-  //     this.selectedItemUnitPrice = this.items.find((x)=>x.productID===ID).unitPrice;
-  //     this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
-  
+    this.selectedID = ID
+    this.selectedItemName = this.items.find((x)=>x._id===ID).productName;
+    this.selectedItemImg = this.items.find((x)=>x._id===ID).imgSrc;
+    this.selectedItemUnitPrice = this.items.find((x)=>x._id===ID).unitPrice;
+    this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
    }
-  
   
      onPlusClick(){
   //   //increase weight
-  //     this.selectedItemweight=this.selectedItemweight+100;
+       this.selectedItemweight=this.selectedItemweight+100;
   //   //update total weigt according to icrease weight
-  //     this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
+       this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
     }
   
     onMinusClick(){
     
-  //     if(this.selectedItemweight>200){
+       if(this.selectedItemweight>100){
   //   //decrease weight
-  //     this.selectedItemweight=this.selectedItemweight-100;
-  //   //update total weigt according to icrease weight
-  //     this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
-  //     }
+      this.selectedItemweight=this.selectedItemweight-100;
+     //update total weigt according to icrease weight
+      this.selectedItemTotalPrice = this.selectedItemUnitPrice*(this.selectedItemweight/100);
+       }
      }
   
   
-  
     addToTable(){
-  //     if(this.getItem(this.selectedID)){
-  //       let index = this.addedItems.indexOf(this.getItem(this.selectedID));
-  //       this.addedItems[index].weight=this.addedItems[index].weight+this.selectedItemweight;
-  //       this.addedItems[index].totalPricePerItem=this.addedItems[index].totalPricePerItem+this.selectedItemTotalPrice;
-  //       console.log(index);
-  //       this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
+       if(this.getItem(this.selectedID)){
+        let index = this.addedItems.indexOf(this.getItem(this.selectedID));
+        this.addedItems[index].weight=this.addedItems[index].weight+this.selectedItemweight;
+        this.addedItems[index].totalPricePerItem=this.addedItems[index].totalPricePerItem+this.selectedItemTotalPrice;
+        console.log(index);
+        this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
        
-  //     }
-  //     else{
+      }
+       else{
   //   //add item object to addeditems array
-  //     this.addedItems.push({productID:this.selectedID,productName:this.selectedItemName,imgSrc:this.selectedItemImg,weight:this.selectedItemweight,totalPricePerItem:this.selectedItemTotalPrice});
+      this.addedItems.push({productID:this.selectedID,productName:this.selectedItemName,imgSrc:this.selectedItemImg,weight:this.selectedItemweight,totalPricePerItem:this.selectedItemTotalPrice});
   //   //update total price 
-  //         this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
+           this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
   
-  //     }
+      }
     
     }
   
      onRemoveClick(productID){
   //   //remove some ite from selected list array
-  //     let selectedObject = this.addedItems.find((x)=>x.productID===productID);
-  //     let index = this.addedItems.indexOf(selectedObject);
-  //     this.addedItems.splice(index,1);
+      let selectedObject = this.addedItems.find((x)=>x.productID===productID);
+      let index = this.addedItems.indexOf(selectedObject);
+       this.addedItems.splice(index,1);
   //   //update total price after removing some item
-  //     this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
+     this.packTotalPrice = this.calculateTotalPrice(this.addedItems);
      }
   
   
   // //calculate total pack price 
     calculateTotalPrice(addedItems){
-  //     let total=0;
-  //     let array = addedItems;
-  //     for(let x of array){
-  //       total = total+x.totalPricePerItem;
-  //     }
-  //     return total;
-  //   }
+      let total = 0;
+    let amount =0;
+    let array = addedItems;
+    for (let x of array) {
+      amount = amount + x.totalPricePerItem;
+    }
+    total = amount - (amount*this.packDiscount)/100
+    return total;
+    }
+
   // //search packageID existense before adding
-  //   getItem(productID){
-  //     return this.addedItems.find((x)=>x.productID===productID);
+    getItem(productID){
+      return this.addedItems.find((x)=>x.productID===productID);
      }
   
   // //on confirm click
@@ -122,6 +123,15 @@ export class FeaturedpackCreateAdminComponent implements OnInit {
 
   // //update PackageService
   //   this.packageService.addFeaturePackage(this.packageID,this.packageName,this.packTotalPrice,this.imgsrc);
+
+    let getItems = [];
+        for(let x of this.addedItems){
+          getItems.push({_id:x.productID,quantity:x.weight});
+        }
+    //call service method to send data to database
+    this.packageService.addFeaturePackage(this.packageName,this.packDiscount,true,getItems).subscribe(()=>{
+      this.router.navigate(['admin', 'featuredpacksadmin',]);
+    });
   
   //     //update PackageDescriptionservice
   //     for(let x of this.addedItems){
