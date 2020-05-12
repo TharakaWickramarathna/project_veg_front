@@ -7,6 +7,7 @@ export class Packages{
     date:string;
     products:PackageDescription[];
     availability:boolean;
+    total:number;
 
     constructor(packageID:string,packageName:string,price:number, products:PackageDescription[]){
         this._id=packageID;

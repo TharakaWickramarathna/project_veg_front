@@ -66,6 +66,8 @@ export class ProductPopupModalComponent implements OnInit {
 
 
   onClickAddToCart(){
+    this.cartService.addItems(this.content.productID,this.content.productName,this.content.imgSrc,this.weight,this.totalPrice,"v");
+    this.modalRef.hide();
     // this.cartService.addItems(this.content.productID,this.weight,this.totalPrice);
     // this.modalRef.hide();
 
@@ -88,6 +90,7 @@ export class ProductPopupModalComponent implements OnInit {
   }
 
   ngOnInit(){
+    console.log(this.content.productID);
     this.unitPrice=this.content.unitPrice;
     this.totalPrice=this.unitPrice*(this.weight/100);
   }

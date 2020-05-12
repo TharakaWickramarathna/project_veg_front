@@ -39,7 +39,7 @@ export class UserPackListComponent implements OnInit {
       this.myPacks=userpacks;
       this.isLoading=false;
     },err => {
-      console.log(err);
+      console.log(err.name);
     });
   }
 

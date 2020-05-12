@@ -1,5 +1,4 @@
 export class Cart{
-    cartID:string;
     productID:string;
     productName:string;
     imgSrc:string;
@@ -7,8 +6,7 @@ export class Cart{
     totalAmountPerItem:number;
     isPack:string;
 
-    constructor(cartID:string,productID:string,productName:string,imgSrc:string,weight:number,totalAmountPerItem:number,isPack:string){
-        this.cartID=cartID;
+    constructor(productID:string,productName:string,imgSrc:string,weight:number,totalAmountPerItem:number,isPack:string){
         this.productID= productID;
         this.productName=productName;
         this.imgSrc=imgSrc;

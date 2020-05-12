@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/shared/services/products.service';
@@ -8,7 +8,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
   templateUrl: './product-edit-admin.component.html',
   styleUrls: ['./product-edit-admin.component.scss']
 })
-export class ProductEditAdminComponent implements OnInit {
+export class ProductEditAdminComponent implements OnInit,OnDestroy {
   productID:string;
   productName :string;
   unitPrice:number;
@@ -21,7 +21,11 @@ export class ProductEditAdminComponent implements OnInit {
 
   constructor(private router:Router,
               private route:ActivatedRoute,
-              private productService:ProductsService) { }
+              private productService:ProductsService) {
+
+               }
+
+  
 
   ngOnInit(): void {
     this.productID=this.route.snapshot.params['id'];
@@ -36,10 +40,11 @@ export class ProductEditAdminComponent implements OnInit {
       this.imgSrc=product.imgSrc;
       this.imagepreview = product.imgSrc;
     });
+}
 
-    
-    
-  }
+  
+
+  
 
 
   onChangeAvailability(){
@@ -71,4 +76,25 @@ export class ProductEditAdminComponent implements OnInit {
   onClickEnableEditing(){
     this.editingDisableStatus=false;
   }
+
+  ngOnDestroy(): void {
+    // this.productService.updateSpecificProduct(this.productID,{
+    //   productName:this.productName,
+    //   unitPrice:this.unitPrice,
+    //   minimumOrder:this.minimumOrder,
+    //   availability:this.Availability,
+    //   imgSrc :this.imgSrc
+    // }).subscribe((x)=>{
+    //   console.log(x);
+    // });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+     public beforeunloadHandler($event) {
+     $event.returnValue = "Are you sure?";
+    }
+
+  
+
+  
 }

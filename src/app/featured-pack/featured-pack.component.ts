@@ -24,7 +24,7 @@ export class FeaturedPackComponent implements OnInit {
     private packageDescriptionService: PackageDescriptionService) {
      }
 
-  openPackageModal(_id, products, name) {
+  openPackageModal(_id, products, name,total) {
     this.modalRef = this.modalService.show(PackPopupModalComponent, {
       backdrop: true,
       keyboard: true,
@@ -37,7 +37,7 @@ export class FeaturedPackComponent implements OnInit {
       animated: true,
       data: {
         heading: 'Add to cart Confirmation',
-        content: { heading: 'Content heading', description: 'Content description', _id: _id, products: products, name:name }
+        content: { heading: 'Content heading', description: 'Content description', _id: _id, products: products, name:name,total:total }
       }
     });
 
@@ -53,6 +53,7 @@ export class FeaturedPackComponent implements OnInit {
   ngOnInit(): void {
     this.packageService.getProductsFromHttp().subscribe((packages)=>{
       this.cards = packages;
+      
     });
    // this.cards = this.packageService.getProducts();
   //  this.cardsDes = this.packageDescriptionService.getPackagesDescriptions();

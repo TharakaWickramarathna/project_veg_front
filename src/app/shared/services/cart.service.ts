@@ -37,67 +37,60 @@ export class CartService {
 
     cart: Cart[] = [];
 
+//add vegetable to the cart
+    addItems(productID,productName,imgSrc, weight, totalAmountPerItem,isPack) {
 
-    // addItems(productID, weight, totalAmountPerItem) {
+        if (this.getItem(productID)) {
+            let ind = this.cart.indexOf(this.getItem(productID));
+            this.cart[ind].weight = this.cart[ind].weight + weight;
+            this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + totalAmountPerItem;
+        }
+        else {
+            this.cart.push(new Cart(productID,productName,imgSrc, weight, totalAmountPerItem, isPack));
+            this.onAdded.emit(this.getNumberOfElement());  
 
-    //     if (this.getItem(productID)) {
-    //         let ind = this.cart.indexOf(this.getItem(productID));
-    //         this.cart[ind].weight = this.cart[ind].weight + weight;
-    //         this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + totalAmountPerItem;
-    //     }
-    //     else {
-    //         this.cartID = '001';
-    //         this.isPack = 'v';
-    //         this.productName = this.productService.getProduct(productID).productName;
-    //         this.imgSrc = this.productService.getProduct(productID).imgSrc;
-    //         this.cart.push(new Cart(this.cartID, productID, this.productName, this.imgSrc, weight, totalAmountPerItem, this.isPack));
-    //         this.onAdded.emit(this.getNumberOfElement());
-    //         // console.log(this.getItem(productID));  
+        }
+        
 
-    //     }
-
-
-    // }
-
-    //added by backend developer
-    add_to_cart(productID, weight) {
-        let header = new HttpHeaders();
-        header.append('Content-Type', 'application/json');
-        return this.http.post<any>(this.ADD_TO_CART_URL, { headers: header });
     }
 
-    getCartItems(){
-        let header = new HttpHeaders();
-        header.append('Content-Type', 'application/json');
-        return this.http.post<any>(this.VIEW_CART_URL, { headers: header });
-    }
-
-    //end
-
-
-
-
-
-
-    // addPackages(packageID, weight, price) {
-
-    //     if (this.getPackage(packageID)) {
-    //         let ind = this.cart.indexOf(this.getPackage(packageID));
-    //         this.cart[ind].weight = this.cart[ind].weight + weight;
-    //         this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + price;
-    //     }
-    //     else {
-    //         this.cartID = '001';
-    //         this.isPack = 'p';
-    //         this.packageName = this.packageService.getPackage(packageID).packageName
-    //         this.imgSrc = this.packageService.getPackage(packageID).imgSrc;
-    //         this.cart.push(new Cart(this.cartID, packageID, this.packageName, this.imgSrc, weight, price, this.isPack));
-    //         this.onAdded.emit(this.getNumberOfElement());
-    //     }
-
-
-
+    // //added by backend developer
+    // add_to_cart(productID, weight) {
+    //     let header = new HttpHeaders();
+    //     header.append('Content-Type', 'application/json');
+    //     return this.http.post<any>(this.ADD_TO_CART_URL, { headers: header });
     // }
+
+    // getCartItems(){
+    //     let header = new HttpHeaders();
+    //     header.append('Content-Type', 'application/json');
+    //     return this.http.post<any>(this.VIEW_CART_URL, { headers: header });
+    // }
+
+    // //end
+
+
+
+
+
+//add feature package to the cart
+    addPackages(packageID, name, total) {
+
+        if (this.getPackage(packageID)) {
+            let ind = this.cart.indexOf(this.getPackage(packageID));
+            this.cart[ind].weight = this.cart[ind].weight + 1;
+            this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + total;
+        }
+        else {
+            let isPack = "p";
+            let imgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-hrfFhs9wpzC_yxjE5A0X737NeVOEKloqJVDF6wAVJNv7qA9q&usqp=CAU";
+            this.cart.push(new Cart(packageID,name,imgSrc,1, total,isPack));
+            this.onAdded.emit(this.getNumberOfElement());
+        }
+
+
+
+    }
 
 
     // addUserPackages(packageID, weight, price) {
@@ -127,21 +120,21 @@ export class CartService {
 
 
     //get single item
-    // getItem(productID) {
-    //     return this.cart.find((x) => x.productID === productID && x.isPack === "v");
-    // }
-    // getPackage(packageID) {
-    //     return this.cart.find((x) => x.productID === packageID && x.isPack === "p");
-    // }
+    getItem(productID) {
+        return this.cart.find((x) => x.productID === productID && x.isPack === "v");
+    }
+    getPackage(packageID) {
+        return this.cart.find((x) => x.productID === packageID && x.isPack === "p");
+    }
     // getUserPackage(packageID) {
     //     return this.cart.find((x) => x.productID === packageID && x.isPack === "u");
     // }
 
 
 
-    // getNumberOfElement() {
-    //     return this.cart.length;
-    // }
+    getNumberOfElement() {
+        return this.cart.length;
+    }
 
     // removeItem(productID) {
     //     let ind = this.cart.indexOf(this.cart.find((x) => x.productID === productID));
