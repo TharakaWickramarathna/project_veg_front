@@ -39,6 +39,7 @@
             <section class="text-right pb-1 my-1">
                 <!--Section heading-->
                 <h2 class="h1 ">Total :Rs {{totalAmount}}/=</h2>
+                <button mdbBtn type="button" color="secondary" rounded="true" size="lg" mdbWavesEffect (click) = "onSaveClick()">Save Cart</button>
                 <button mdbBtn type="button" color="success" rounded="true" size="lg" mdbWavesEffect (click)="orderConfirmModal()">CheckOut</button>
             </section>
         </div>

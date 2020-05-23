@@ -16,6 +16,8 @@ export class CartComponent implements OnInit {
   item :Array<any>;
   totalAmount: number = 0;
 
+  userID="5eaf18c4d82e71543ce00229";
+
   constructor(private cartService: CartService,
     private modalService: MDBModalService) {
       this.item = new Array<any>();
@@ -68,6 +70,7 @@ export class CartComponent implements OnInit {
     for (var x = 0; x < this.cartItems.length; x++) {
       this.totalAmount = this.totalAmount + this.cartItems[x].totalAmountPerItem;
     }
+    //console.log(this.cartItems);
 
   }
 
@@ -75,6 +78,21 @@ export class CartComponent implements OnInit {
 
   onClickRemove(productID) {
     //this.cartService.removeItem(productID);
+  }
+
+  onSaveClick(){
+
+//filter details to send database
+    let products:{productId:string,quantity:number,isPack:string}[]=[];
+    for(let product of this.cartItems){
+      products.push({productId:product.productID,quantity:product.weight,isPack:product.isPack});
+    }
+
+    //console.log(products);
+//send data to database using service
+    this.cartService.saveCartToDatabase(this.userID,products).subscribe((res)=>{
+        console.log("succesfullu added cart to database");
+    });
   }
 
 }

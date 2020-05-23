@@ -16,7 +16,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CartService {
 
-    private ADD_TO_CART_URL = 'http://localhost:5000/product/add-to-cart/5eaa93a300515853084feb3c/100';
+    private ADD_TO_CART_URL = 'http://localhost:5000/cart/add';
     private VIEW_CART_URL = 'http://localhost:5000/product/cart-view';
 
     onAdded = new EventEmitter<number>();
@@ -141,6 +141,11 @@ export class CartService {
     //     this.cart.splice(ind, 1);
     //     this.onRemoved.next(this.getItems());
     // }
+
+    saveCartToDatabase(clientId:string,products:{productId:string,quantity:number,isPack:string}[]){
+        let objectForSending = {clientId:clientId,products:products};
+        return this.http.post(this.ADD_TO_CART_URL,objectForSending);
+    }
 
 
 }
