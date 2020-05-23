@@ -27,9 +27,6 @@ export class ViewPopUpModelComponent implements OnInit {
   content:any;
   weight=1;
   userID="5eaf18c4d82e71543ce00229";
-
-
-  
   totalAmount:number;
   specificProductList:UserPackageProductDescription[]=[];
 
@@ -44,11 +41,11 @@ export class ViewPopUpModelComponent implements OnInit {
     //add product list related to specific package
           this.specificProductList = userpacks.find((pack)=>{return pack._id===this.packageID;}).products;
           console.log(this.specificProductList);
-          
-
+        
     //calculate total price
         this.totalAmount = this.calculateTotalPrice(this.specificProductList);
       });
+      
 }
 
   onClose(event: any) {
@@ -60,10 +57,9 @@ export class ViewPopUpModelComponent implements OnInit {
   }
 
   onAddToCartClick(){
-    // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
-    // this.modalRef.hide();
-   // this.cartService.addUserPackages(this.content.packageID,this.weight,this.totalAmount);
+    this.cartService.addUserPackages(this.content.packageID,this.packageName,this.weight,this.totalAmount);
     this.modalRef.hide();
+    console.log(this.packageID+this.weight+this.totalAmount);
   }
 
   onEditClick(){

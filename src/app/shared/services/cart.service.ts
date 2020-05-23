@@ -93,26 +93,25 @@ export class CartService {
     }
 
 
-    // addUserPackages(packageID, weight, price) {
-    //     if (this.getUserPackage(packageID)) {
-    //         let ind = this.cart.indexOf(this.getUserPackage(packageID));
-    //         this.cart[ind].weight = this.cart[ind].weight + weight;
-    //         this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + price;
-    //     }
-    //     else {
-    //         this.cartID = '001';
-    //         this.isPack = 'u'
-    //         this.packageName = this.userPackageService.getPackage(packageID).packageName;
-    //         this.imgSrc = 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/powerhouse_vegetables_slideshow/650x350_powerhouse_vegetables_slideshow.jpg';
-    //         this.cart.push(new Cart(this.cartID, packageID, this.packageName, this.imgSrc, weight, price, this.isPack));
-    //         this.onAdded.emit(this.getNumberOfElement());
+    addUserPackages(packageID, userpackname,weight, price) {
+        if (this.getUserPackage(packageID)) {
+            let ind = this.cart.indexOf(this.getUserPackage(packageID));
+            this.cart[ind].weight = this.cart[ind].weight + 1;
+            this.cart[ind].totalAmountPerItem = this.cart[ind].totalAmountPerItem + price;
+        }
+        else {
+            let isPack = 'u';
+            //let packageName = this.userPackageService.getPackage(packageID).name;
+            let imgSrc = 'https://i.dlpng.com/static/png/351027_preview.png';
+            this.cart.push(new Cart(packageID, userpackname,imgSrc, weight, price, isPack));
+            this.onAdded.emit(this.getNumberOfElement());
 
-    //     }
-
+        }
 
 
 
-    //}
+
+    }
 
     getItems() {
         return this.cart.slice();
@@ -126,9 +125,10 @@ export class CartService {
     getPackage(packageID) {
         return this.cart.find((x) => x.productID === packageID && x.isPack === "p");
     }
-    // getUserPackage(packageID) {
-    //     return this.cart.find((x) => x.productID === packageID && x.isPack === "u");
-    // }
+
+    getUserPackage(packageID) {
+        return this.cart.find((x) => x.productID === packageID && x.isPack === "u");
+    }
 
 
 
