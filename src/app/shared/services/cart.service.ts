@@ -10,6 +10,10 @@ import { Subject } from 'rxjs';
 
 //added from backend developer
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IncominCartModel } from '../models/incomingCart.model';
+
+
+
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +21,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CartService {
 
     private ADD_TO_CART_URL = 'http://localhost:5000/cart/add';
-    private VIEW_CART_URL = 'http://localhost:5000/product/cart-view';
+    private FETCH_CART_URL = 'http://localhost:5000/cart/view/';
 
     onAdded = new EventEmitter<number>();
     onRemoved = new Subject<Cart[]>();
@@ -35,7 +39,14 @@ export class CartService {
         private userPackageDescriptionService: UserPackDescriptionService,
         private http: HttpClient) { }
 
-    cart: Cart[] = [];
+    private cart: Cart[] = [];
+
+
+
+//fetch existing cart from database
+    fetchCartItems(clientId:string){
+        return this.http.get<IncominCartModel>(this.FETCH_CART_URL+clientId);
+    }
 
 //add vegetable to the cart
     addItems(productID,productName,imgSrc, weight, totalAmountPerItem,isPack) {
@@ -74,7 +85,7 @@ export class CartService {
 
 
 //add feature package to the cart
-    addPackages(packageID, name, total) {
+    addPackages(packageID, name, quantity, total) {
 
         if (this.getPackage(packageID)) {
             let ind = this.cart.indexOf(this.getPackage(packageID));
@@ -84,7 +95,7 @@ export class CartService {
         else {
             let isPack = "p";
             let imgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-hrfFhs9wpzC_yxjE5A0X737NeVOEKloqJVDF6wAVJNv7qA9q&usqp=CAU";
-            this.cart.push(new Cart(packageID,name,imgSrc,1, total,isPack));
+            this.cart.push(new Cart(packageID,name,imgSrc,quantity, total,isPack));
             this.onAdded.emit(this.getNumberOfElement());
         }
 
@@ -135,16 +146,38 @@ export class CartService {
     getNumberOfElement() {
         return this.cart.length;
     }
-
-    // removeItem(productID) {
-    //     let ind = this.cart.indexOf(this.cart.find((x) => x.productID === productID));
-    //     this.cart.splice(ind, 1);
-    //     this.onRemoved.next(this.getItems());
-    // }
-
+//remove items from cart array
+    removeItem(productID) {
+        let ind = this.cart.indexOf(this.cart.find((x) => x.productID === productID));
+        this.cart.splice(ind, 1);
+        this.onRemoved.next(this.getItems());
+    }
+//save cart array to databse
     saveCartToDatabase(clientId:string,products:{productId:string,quantity:number,isPack:string}[]){
         let objectForSending = {clientId:clientId,products:products};
         return this.http.post(this.ADD_TO_CART_URL,objectForSending);
+    }
+//clear cart
+    clearCart(){
+        this.cart = [];
+    }
+
+//algorithm for fill existing cart array with incoming object from database
+    fillExistingItem(existingItems){
+        //filter product to add exsisting cart
+            for(let product of existingItems.listOfProduct){
+              this.addItems(product.itemList._id,product.itemList.productName,product.itemList.imgSrc,product.quantity,product.totalPricePerItem,"v");
+            }
+            //filter suggested pack to add exsisting cart
+            for(let sugPack of existingItems.listOfSuggestedPack){
+              this.addPackages(sugPack.itemList._id,sugPack.itemList.name,sugPack.quantity,sugPack.totalPricePerItem)
+            }
+            //filter user pack to add exsisting cart
+            for(let userPack of existingItems.listOfUserPack){
+              this.addUserPackages(userPack.itemList._id,userPack.itemList.name,userPack.quantity,userPack.totalPricePerItem)
+            }
+        
+            
     }
 
 

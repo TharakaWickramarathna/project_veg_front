@@ -21,24 +21,17 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService,
     private modalService: MDBModalService) {
       this.item = new Array<any>();
-      
-      //added from backend developer
-      // cartService.getCartItems().subscribe((items) =>{
-      //   this.item = items;
-      // });
-      // end
 
+    this.cartService.onAdded.subscribe(()=>{
+      this.cartItems=this.cartService.getItems();
+      this.calculateTotalAmount();
+    });
 
-
-    //getting new array after removing some element from cart
-    // this.cartService.onRemoved.subscribe((arr:Cart[])=>{
-    //     this.cartItems=arr;
-    //calculating new total after removing items
-    // this.totalAmount=0;
-    // for(var x=0; x<this.cartItems.length; x++){
-    //   this.totalAmount=this.totalAmount+this.cartItems[x].totalAmountPerItem;
-    // }
-    // });
+    this.cartService.onRemoved.subscribe(()=>{
+      this.cartItems = this.cartService.getItems();
+      this.calculateTotalAmount();
+    });
+    
   }
 
   si = '';
@@ -65,20 +58,19 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cartItems = this.cartService.getItems();
+    this.cartItems=this.cartService.getItems();
+}
 
-    for (var x = 0; x < this.cartItems.length; x++) {
-      this.totalAmount = this.totalAmount + this.cartItems[x].totalAmountPerItem;
-    }
-    //console.log(this.cartItems);
 
-  }
+ 
 
   headElements = ['ID', 'Product View', 'Product Name', 'Quantity', 'Price', 'Remove'];
-
-  // onClickRemove(productID) {
-  //   this.cartService.removeItem(productID);
-  // }
+//click on remove items from cart
+  onClickRemove(productID,isPack) {
+    this.cartService.removeItem(productID);
+    console.log(productID);
+    
+  }
 
   onSaveClick(){
 
@@ -93,6 +85,14 @@ export class CartComponent implements OnInit {
     this.cartService.saveCartToDatabase(this.userID,products).subscribe((res)=>{
         console.log("succesfullu added cart to database");
     });
+  }
+
+  calculateTotalAmount(){
+    let amount = 0;
+    for (let x of this.cartItems) {
+      amount = amount+x.totalAmountPerItem;
+    }
+    this.totalAmount = amount;
   }
 
 }
