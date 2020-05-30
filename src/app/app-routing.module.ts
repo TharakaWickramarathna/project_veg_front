@@ -22,6 +22,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ProductListAdminComponent } from './admin/products-admin/product-list-admin/product-list-admin.component';
 import { ProductEditAdminComponent } from './admin/products-admin/product-edit-admin/product-edit-admin.component';
+import { ProductCreateAdminComponent } from './admin/products-admin/product-create-admin/product-create-admin.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
     {path:'productsadmin',children:[
       {path:'',component:ProductListAdminComponent},
       {path:':id/editproduct',component:ProductEditAdminComponent},
+      {path:'createproduct',component:ProductCreateAdminComponent},
     ]},
 
     {path:'dashboard',component:DashboardComponent},

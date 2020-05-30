@@ -24,4 +24,8 @@ export class ProductListAdminComponent implements OnInit {
     this.router.navigate(['admin','productsadmin',productID,'editproduct']);
   }
 
+  onCreateClick(){
+    this.router.navigate(['admin','productsadmin','createproduct']);
+  }
+
 }

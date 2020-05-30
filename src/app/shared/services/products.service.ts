@@ -10,6 +10,7 @@ export class ProductsService{
     private GET_ALL_PRODUCT_URL = "http://localhost:5000/product/all";
     private GET_SPECIFIC_PRODUCT = "http://localhost:5000/product/";
     private UPDATE_SPECIFIC_ITEM = "http://localhost:5000/product//update/"
+    private ADD_PRODUCT_TO_DATABASE = "http://localhost:5000/product/add";
 
     productsChanged = new Subject<Products[]>();
 
@@ -59,6 +60,10 @@ export class ProductsService{
 //update specific products
         updateSpecificProduct(productID,itemObject){
             return this.http.post(this.UPDATE_SPECIFIC_ITEM+productID,itemObject);
+        }
+//add product to database
+        addProductToDatabase(itemObject){
+            return this.http.post(this.ADD_PRODUCT_TO_DATABASE,itemObject);
         }
 
     
