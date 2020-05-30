@@ -63,9 +63,10 @@ import { FeaturedpackCreateAdminComponent } from './admin/featuredpack-admin/fea
 // import auth servie class(T)
 import {AuthService} from './admin/shared/services/auth.service';
 import { ProductCreateAdminComponent } from './admin/products-admin/product-create-admin/product-create-admin.component';
-import { PendingOrdersComponent } from './admin/orders/pending-orders/pending-orders.component';
-import { PreparingOrdersComponent } from './admin/orders/preparing-orders/preparing-orders.component';
-import { DeliveringOrdersComponent } from './admin/orders/delivering-orders/delivering-orders.component';
+import { PendingOrdersAdminComponent } from './admin/orders/pending-orders-admin/pending-orders-admin.component';
+import { PreparingOrdersAdminComponent } from './admin/orders/preparing-orders-admin/preparing-orders-admin.component';
+import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders-admin/delivering-orders-admin.component';
+
 
 //import {MMatAutocompleteModule,MatInputModule} from '@angular/material';
 
@@ -112,10 +113,9 @@ import { DeliveringOrdersComponent } from './admin/orders/delivering-orders/deli
     FeaturedpackEditAdminComponent,
     FeaturedpackCreateAdminComponent,
     ProductCreateAdminComponent,
-    PendingOrdersComponent,
-    PreparingOrdersComponent,
-    DeliveringOrdersComponent,
-    
+    PendingOrdersAdminComponent,
+    PreparingOrdersAdminComponent,
+    DeliveringOrdersAdminComponent
     
  
   ],

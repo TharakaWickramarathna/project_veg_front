@@ -1,5 +1,18 @@
-<div class="tab">
-    <button class="tablinks">London</button>
-    <button class="tablinks">Paris</button>
-    <button class="tablinks">Tokyo</button>
-  </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab">
+                <button class="tablinks" routerLink="pending" routerLinkActive = "active"
+                [routerLinkActiveOptions]="{exact:true}">Pending</button>
+                <button class="tablinks" routerLink="preparing" routerLinkActive = "active">Preparing</button>
+                <button class="tablinks" routerLink="delivering" routerLinkActive = "active">Delivering</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

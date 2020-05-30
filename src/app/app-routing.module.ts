@@ -23,6 +23,9 @@ import { UsersComponent } from './admin/users/users.component';
 import { ProductListAdminComponent } from './admin/products-admin/product-list-admin/product-list-admin.component';
 import { ProductEditAdminComponent } from './admin/products-admin/product-edit-admin/product-edit-admin.component';
 import { ProductCreateAdminComponent } from './admin/products-admin/product-create-admin/product-create-admin.component';
+import { PendingOrdersAdminComponent } from './admin/orders/pending-orders-admin/pending-orders-admin.component';
+import { PreparingOrdersAdminComponent } from './admin/orders/preparing-orders-admin/preparing-orders-admin.component';
+import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders-admin/delivering-orders-admin.component';
 
 
 const routes: Routes = [
@@ -39,7 +42,11 @@ const routes: Routes = [
     {path:'create',component:UserPackCreateNewComponent}]},
 
   {path:'admin' , component:AdminComponent,children:[
-    {path:'orders',component:OrdersComponent},
+    {path:'orders',component:OrdersComponent,children:[
+      {path:'pending',component:PendingOrdersAdminComponent},
+      {path:'preparing',component:PreparingOrdersAdminComponent},
+      {path:"delivering",component:DeliveringOrdersAdminComponent},
+    ]},
     {path:'productsadmin',children:[
       {path:'',component:ProductListAdminComponent},
       {path:':id/editproduct',component:ProductEditAdminComponent},
