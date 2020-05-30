@@ -11,6 +11,8 @@ export class ProductsService{
     private GET_SPECIFIC_PRODUCT = "http://localhost:5000/product/";
     private UPDATE_SPECIFIC_ITEM = "http://localhost:5000/product//update/"
     private ADD_PRODUCT_TO_DATABASE = "http://localhost:5000/product/add";
+    //private UPDATE_SPECIFIC_ITEM = "http://localhost:5000/product/update/";
+    //private UPLOAD_IMG_URL = 'http://localhost:5000/product/updateProductImage/';
 
     productsChanged = new Subject<Products[]>();
 
@@ -66,8 +68,10 @@ export class ProductsService{
             return this.http.post(this.ADD_PRODUCT_TO_DATABASE,itemObject);
         }
 
-    
-
+        /////////////////////product img ///////////////////
+        updateProductImg(_id, updatedImgURL){
+          //  return this.http.patch(this.UPLOAD_IMG_URL+_id,updatedImgURL);
+        }
 
     getProducts(){
         

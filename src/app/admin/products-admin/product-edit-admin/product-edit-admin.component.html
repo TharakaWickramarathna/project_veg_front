@@ -57,18 +57,23 @@
                 <label class="custom-control-label"
                     for="customSwitch1">{{Availability===true?"Available":"Unavailable"}}</label>
             </div>
-            <div class="md-form form-group mt-5">
-                <input mdbInput type="text" class="form-control" id="formGroupExampleInput5MD" [(ngModel)]="imgSrc"
-                    [disabled]="editingDisableStatus">
-                <label for="formGroupExampleInput5MD">Image URL</label>
-            </div>
-            <div>
+            <div class="mt-5">
                 <button type="button" mdbBtn color="success" mdbWavesEffect class="w-100" data-toggle="modal"
                     data-target="#basicExample" (click)="frame.show()" [disabled]="editingDisableStatus">UPDATE AND SAVE
                     <mdb-icon far icon="edit" style="margin-left: 7px;"> </mdb-icon></button>
                 <button type="button" mdbBtn color="light" mdbWavesEffect class="w-100"
                     (click)="onCancelClick()">DISCARD CHANGES<mdb-icon fas icon="times" style="margin-left: 7px;">
                     </mdb-icon></button>
+            </div>
+            <div class="mt-5">
+                <label>Change Image</label>
+                <div>
+                    <input mdbInput type='file' (change)="onImgUploadClick($event)" id="imgUpload"
+                        [disabled]="editingDisableStatus">
+                    <button type="button" mdbBtn color="success" mdbWavesEffect class="w-100"
+                        [disabled]="editingDisableStatus" (click)="onImgSave()">Save image
+                    </button>
+                </div>
             </div>
 
 
