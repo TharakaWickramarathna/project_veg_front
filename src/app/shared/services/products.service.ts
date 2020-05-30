@@ -10,7 +10,7 @@ export class ProductsService{
     private GET_ALL_PRODUCT_URL = "http://localhost:5000/product/all";
     private GET_SPECIFIC_PRODUCT = "http://localhost:5000/product/";
     private UPDATE_SPECIFIC_ITEM = "http://localhost:5000/product/update/";
-    private UPLOAD_IMG_URL = 'http://localhost:5000/product/updateProductImage/';
+    //private UPLOAD_IMG_URL = 'http://localhost:5000/product/updateProductImage/';
 
     productsChanged = new Subject<Products[]>();
 
@@ -64,7 +64,7 @@ export class ProductsService{
 
         /////////////////////product img ///////////////////
         updateProductImg(_id, updatedImgURL){
-            return this.http.patch(this.UPLOAD_IMG_URL+_id,updatedImgURL);
+          //  return this.http.patch(this.UPLOAD_IMG_URL+_id,updatedImgURL);
         }
 
     getProducts(){

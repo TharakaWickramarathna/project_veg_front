@@ -69,9 +69,9 @@ export class ProductEditAdminComponent implements OnInit, OnDestroy {
 
   onImgSave(){
     console.log(this.imgSrc);
-    this.productService.updateProductImg(this.productID, this.imgSrc).subscribe((x) => {
-      this.router.navigate(['admin', 'productsadmin']);
-    });
+    // this.productService.updateProductImg(this.productID, this.imgSrc).subscribe((x) => {
+    //   this.router.navigate(['admin', 'productsadmin']);
+   // });
   }
 
 
