@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersService } from 'src/app/shared/services/orders-service.service';
 
 @Component({
   selector: 'app-pending-orders-admin',
@@ -6,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pending-orders-admin.component.scss']
 })
 export class PendingOrdersAdminComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
   pendingOrders=[1];
   headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
+
+  constructor(private orderService:OrdersService) { }
+
+  ngOnInit(): void {
+    this.orderService.fetchAllOrdersFromDatabase().subscribe((res)=>{
+      console.log(res);
+    });
+
+  }
+  
 
 }
