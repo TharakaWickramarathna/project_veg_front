@@ -63,6 +63,9 @@ import { FeaturedpackCreateAdminComponent } from './admin/featuredpack-admin/fea
 // import auth servie class(T)
 import {AuthService} from './admin/shared/services/auth.service';
 import { ProductCreateAdminComponent } from './admin/products-admin/product-create-admin/product-create-admin.component';
+import { PendingOrdersComponent } from './admin/orders/pending-orders/pending-orders.component';
+import { PreparingOrdersComponent } from './admin/orders/preparing-orders/preparing-orders.component';
+import { DeliveringOrdersComponent } from './admin/orders/delivering-orders/delivering-orders.component';
 
 //import {MMatAutocompleteModule,MatInputModule} from '@angular/material';
 
@@ -109,6 +112,9 @@ import { ProductCreateAdminComponent } from './admin/products-admin/product-crea
     FeaturedpackEditAdminComponent,
     FeaturedpackCreateAdminComponent,
     ProductCreateAdminComponent,
+    PendingOrdersComponent,
+    PreparingOrdersComponent,
+    DeliveringOrdersComponent,
     
     
  
