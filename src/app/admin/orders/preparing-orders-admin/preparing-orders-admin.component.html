@@ -1,1 +1,31 @@
-<p>preparing-orders-admin works!</p>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-12">
+            <section class="text-center pb-1 my-1">
+                <!--Section heading-->
+                <h2 class="h1 ">Preparing Order Details</h2>
+                <hr>
+            </section>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table mdbTable mdbTableScroll scrollY="true" maxHeight="600" bordered="true">
+            <thead class="success-color white-text">
+                <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of preparingOrders">
+                    <td>id</td>
+                    <td>2020-04-29</td>
+                    <td>01.30</td>
+                    <td>Colombo</td>
+                    <td>Rs.54/=</td>
+                    <td>lll</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

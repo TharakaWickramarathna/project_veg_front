@@ -12,4 +12,6 @@ export class DeliveringOrdersAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deliveringOrders=[1];
+  headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
 }

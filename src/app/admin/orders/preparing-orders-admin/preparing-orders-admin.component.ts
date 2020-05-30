@@ -11,5 +11,6 @@ export class PreparingOrdersAdminComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  preparingOrders=[1];
+  headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
 }
