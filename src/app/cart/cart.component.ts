@@ -73,8 +73,8 @@ export class CartComponent implements OnInit {
 
   headElements = ['ID', 'Product View', 'Product Name', 'Quantity', 'Price', 'Remove'];
 
-  // onClickRemove(productID) {
-  //   this.cartService.removeItem(productID);
-  // }
+  onClickRemove(productID) {
+   // this.cartService.removeItem(productID);
+  }
 
 }
