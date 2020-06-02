@@ -31,7 +31,8 @@ export class MyOrdersComponent implements OnInit {
           //{ title: 'Trekking', date: new Date('2019-06-22T20:27:33.709Z') }
         ];
         console.log(activities);
-
+        
+//sort array by date and time
         const sortedActivities = activities.slice().sort((a:any,b:any) => a.date - b.date);
         
 
