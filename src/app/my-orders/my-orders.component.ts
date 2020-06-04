@@ -21,22 +21,6 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.ordersService.fetchOrdersFromDatabase(this.userID).subscribe((orders)=>{
 
-        this.pendingOrders = orders;
-        this.pendingOrders.sort()
-
-        const activities:{title:string,date:Date}[] = [
-          { title: 'Hiking', date: new Date('2020-05-30T20:02:27.722Z') },
-          { title: 'Hiking', date: new Date('2020-05-30T20:07:18.621Z') },
-          { title: 'Shopping', date: new Date('2020-05-30T19:58:17.029Z') }
-          //{ title: 'Trekking', date: new Date('2019-06-22T20:27:33.709Z') }
-        ];
-        console.log(activities);
-        
-//sort array by date and time
-        const sortedActivities = activities.slice().sort((a:any,b:any) => a.date - b.date);
-        
-
-        console.log(sortedActivities);
 
 
 
@@ -59,6 +43,11 @@ export class MyOrdersComponent implements OnInit {
 
       }
     }
+  }
+
+  sortOrderByDateAndTime(order:IncomingOrdersModel[]){
+    const sortedOrders = order.slice().sort((a:any,b:any) => b.date - a.date);
+    return sortedOrders;
   }
 
 

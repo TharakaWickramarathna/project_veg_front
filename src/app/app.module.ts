@@ -66,6 +66,9 @@ import { ProductCreateAdminComponent } from './admin/products-admin/product-crea
 import { PendingOrdersAdminComponent } from './admin/orders/pending-orders-admin/pending-orders-admin.component';
 import { PreparingOrdersAdminComponent } from './admin/orders/preparing-orders-admin/preparing-orders-admin.component';
 import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders-admin/delivering-orders-admin.component';
+import { PendingOrdersComponent } from './my-orders/pending-orders/pending-orders.component';
+import { DeliveringOrdersComponent } from './my-orders/delivering-orders/delivering-orders.component';
+import { CompletedOrdersComponent } from './my-orders/completed-orders/completed-orders.component';
 
 
 //import {MMatAutocompleteModule,MatInputModule} from '@angular/material';
@@ -115,7 +118,10 @@ import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders
     ProductCreateAdminComponent,
     PendingOrdersAdminComponent,
     PreparingOrdersAdminComponent,
-    DeliveringOrdersAdminComponent
+    DeliveringOrdersAdminComponent,
+    PendingOrdersComponent,
+    DeliveringOrdersComponent,
+    CompletedOrdersComponent
     
  
   ],

@@ -1,31 +1,18 @@
 <div class="container">
-    <div class="row" style="margin-top: 20px;">
+    <div class="row">
         <div class="col-md-12">
-            <section class="text-center pb-1 my-1">
-                <!--Section heading-->
-                <h2 class="h1 ">My Order Details</h2>
-                <hr>
-            </section>
+            <div class="tab">
+                <button class="tablinks" routerLink="pending" routerLinkActive = "active"
+                [routerLinkActiveOptions]="{exact:true}">Pending</button>
+                <button class="tablinks" routerLink="preparing" routerLinkActive = "active">Preparing</button>
+                <button class="tablinks" routerLink="delivering" routerLinkActive = "active">Delivering</button>
+            </div>
         </div>
     </div>
-    <div class="table-responsive">
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="600" bordered="true">
-            <thead class="success-color white-text">
-                <tr>
-                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of pendingOrders">
-                    <td>{{order._id}}</td>
-                    <td>2020-04-29</td>
-                    <td>01.30</td>
-                    <td>Colombo</td>
-                    <td>Rs.{{order.totalAmount}}/=</td>
-                    <td>{{order.statusOfCompletion}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-12">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 
 </div>
