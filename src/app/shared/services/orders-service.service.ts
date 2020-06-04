@@ -14,7 +14,7 @@ export class OrdersService {
   private GET_ALL_ORDERS_URL = "http://localhost:5000/orders/all";
 
   sortOrderByDateAndTime(order:IncomingOrdersModel[]){
-    const sortedOrders = order.slice().sort((a:any,b:any) => b.date - a.date);
+    const sortedOrders = order.slice().sort((a:any,b:any) =>a.date - b.date);
     return sortedOrders;
   }
 

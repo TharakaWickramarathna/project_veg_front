@@ -8,7 +8,7 @@ export class IncomingOrdersModel{
     statusOfCompletion:string;
     _id:string;
     clientID: "5eaf18c4d82e71543ce00229";
-    date:string;
+    date:Date;
     orderAmount:number;
     deliveryCharges:number;
     commision:string;
