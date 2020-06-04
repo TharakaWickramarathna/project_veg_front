@@ -45,4 +45,12 @@ export class OrdersService {
   fetchPendingOrdersFromDatabase(clientID:string){
     return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL +clientID+"/"+ "?status=Pending+Approval");
   }
+
+  fetchPreparingOrdersFromDatabase(clientID:string){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL +clientID+"/"+ "?status=Preparing");
+  }
+
+  fetchDeliveringOrdersFromDatabase(clientID:string){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL +clientID+"/"+ "?status=Delivering");
+  }
 }
