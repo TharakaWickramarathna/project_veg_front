@@ -11,7 +11,7 @@ export class OrdersService {
 
   private CONFIRM_ORDER_URL = "http://localhost:5000/orders/add";
   private GET_ORDERS_URL = "http://localhost:5000/orders/";
-  private GET_ALL_ORDERS_URL = "http://localhost:5000/orders/all";
+  //private GET_CLIENT_ORDERS_URL = "http://localhost:5000/orders/";
 
   sortOrderByDateAndTime(order: IncomingOrdersModel[]) {
     //convert all string date type to Date type  
@@ -40,5 +40,9 @@ export class OrdersService {
 
   fetchAllPreparingOrdersFromDatabase() {
     return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL + "?status=Preparing");
+  }
+
+  fetchPendingOrdersFromDatabase(clientID:string){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL +clientID+"/"+ "?status=Pending+Approval");
   }
 }
