@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/shared/services/orders-service.service';
 import { IncomingOrdersModel } from 'src/app/shared/models/incomingOrder.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-orders-admin',
@@ -13,7 +14,8 @@ export class PendingOrdersAdminComponent implements OnInit {
 
   pendingOrders:IncomingOrdersModel[];
 
-  constructor(private orderService:OrdersService) { }
+  constructor(private orderService:OrdersService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.orderService.fetchAllPendingOrdersFromDatabase().subscribe((pendingOrders:IncomingOrdersModel[])=>{
@@ -21,6 +23,10 @@ export class PendingOrdersAdminComponent implements OnInit {
       //console.log(pendingOrders[0].date.getHours()+"."+(pendingOrders[0].date.getMinutes()));
     });
 
+  }
+
+  onOrderClick(orderID:string,statusOfCompletion:string){
+    this.router.navigate(['admin','orders',orderID,statusOfCompletion]);
   }
   
 

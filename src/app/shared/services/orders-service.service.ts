@@ -11,7 +11,7 @@ export class OrdersService {
 
   private CONFIRM_ORDER_URL = "http://localhost:5000/orders/add";
   private GET_ORDERS_URL = "http://localhost:5000/orders/";
-  //private GET_CLIENT_ORDERS_URL = "http://localhost:5000/orders/";
+  private GET_ALL_ORDERS = "http://localhost:5000/orders/all";
 
   sortOrderByDateAndTime(order: IncomingOrdersModel[]) {
     //convert all string date type to Date type  
@@ -52,5 +52,9 @@ export class OrdersService {
 
   fetchDeliveringOrdersFromDatabase(clientID:string){
     return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL +clientID+"/"+ "?status=Delivering");
+  }
+
+  fetchAllOrdersFromDatabse(){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ALL_ORDERS);
   }
 }

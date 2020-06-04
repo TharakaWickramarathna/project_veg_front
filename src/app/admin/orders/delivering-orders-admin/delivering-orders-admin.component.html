@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let order of deliveringOrders;let i=index">
+                <tr *ngFor="let order of deliveringOrders;let i=index"   (click)="onOrderClick(order._id,order.statusOfCompletion)" class="tab">
                     <td>{{i+1}}</td>
                     <td>{{order.date.getFullYear()+"-"+(order.date.getMonth()+1)+"-"+order.date.getDate()}}</td>
                     <td>{{order.date.getHours()+"."+order.date.getMinutes()+(order.date.getHours()>12?"PM":"AM")}}</td>

@@ -54,7 +54,7 @@ const routes: Routes = [
       {path:'pending',component:PendingOrdersAdminComponent},
       {path:'preparing',component:PreparingOrdersAdminComponent},
       {path:"delivering",component:DeliveringOrdersAdminComponent},
-      {path:':id',component:OrderPreviewComponent}
+      {path:':id/:status',component:OrderPreviewComponent}
     ]},
     {path:'productsadmin',children:[
       {path:'',component:ProductListAdminComponent},
