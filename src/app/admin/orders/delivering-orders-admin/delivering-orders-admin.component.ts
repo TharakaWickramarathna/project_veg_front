@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersService } from 'src/app/shared/services/orders-service.service';
+import { IncomingOrdersModel } from 'src/app/shared/models/incomingOrder.model';
 
 @Component({
   selector: 'app-delivering-orders-admin',
@@ -7,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliveringOrdersAdminComponent implements OnInit {
 
-  constructor() { }
+  deliveringOrders:IncomingOrdersModel[];
+  headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
+
+  constructor(private orderService:OrdersService) { }
 
   ngOnInit(): void {
+    this.orderService.fetchAllDeliveringOrdersFromDatabase().subscribe((deliveringOrders:IncomingOrdersModel[])=>{
+      this.deliveringOrders = this.orderService.sortOrderByDateAndTime(deliveringOrders);
+      console.log(this.deliveringOrders);
+    });
   }
 
-  deliveringOrders=[1];
-  headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
+  
+  
 }

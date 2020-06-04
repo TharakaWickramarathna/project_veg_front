@@ -69,6 +69,7 @@ import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders
 import { PendingOrdersComponent } from './my-orders/pending-orders/pending-orders.component';
 import { DeliveringOrdersComponent } from './my-orders/delivering-orders/delivering-orders.component';
 import { CompletedOrdersComponent } from './my-orders/completed-orders/completed-orders.component';
+import { PreparingOrdersComponent } from './my-orders/preparing-orders/preparing-orders.component';
 
 
 //import {MMatAutocompleteModule,MatInputModule} from '@angular/material';
@@ -121,7 +122,8 @@ import { CompletedOrdersComponent } from './my-orders/completed-orders/completed
     DeliveringOrdersAdminComponent,
     PendingOrdersComponent,
     DeliveringOrdersComponent,
-    CompletedOrdersComponent
+    CompletedOrdersComponent,
+    PreparingOrdersComponent
     
  
   ],

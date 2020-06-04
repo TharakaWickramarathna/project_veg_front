@@ -13,6 +13,11 @@ export class OrdersService {
   private GET_ORDERS_URL = "http://localhost:5000/orders/";
   private GET_ALL_ORDERS_URL = "http://localhost:5000/orders/all";
 
+  sortOrderByDateAndTime(order:IncomingOrdersModel[]){
+    const sortedOrders = order.slice().sort((a:any,b:any) => b.date - a.date);
+    return sortedOrders;
+  }
+
   confirmOrder(orderObject:{clientID:string,products:{_id:string,quantity:number,isPack:string}[]}){
     return this.http.post(this.CONFIRM_ORDER_URL,orderObject);
   }
@@ -21,7 +26,15 @@ export class OrdersService {
     return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL+clientID);
   }
 
-  fetchAllOrdersFromDatabase(){
-    return this.http.get<IncomingOrdersModel[]>(this.GET_ALL_ORDERS_URL);
+  fetchAllPendingOrdersFromDatabase(){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL+"?status=Pending+Approval");
+  }
+
+  fetchAllDeliveringOrdersFromDatabase(){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL+"?status=Delivering");
+  }
+
+  fetchAllPreparingOrdersFromDatabase(){
+    return this.http.get<IncomingOrdersModel[]>(this.GET_ORDERS_URL+"?status=Preparing");
   }
 }

@@ -26,6 +26,9 @@ import { ProductCreateAdminComponent } from './admin/products-admin/product-crea
 import { PendingOrdersAdminComponent } from './admin/orders/pending-orders-admin/pending-orders-admin.component';
 import { PreparingOrdersAdminComponent } from './admin/orders/preparing-orders-admin/preparing-orders-admin.component';
 import { DeliveringOrdersAdminComponent } from './admin/orders/delivering-orders-admin/delivering-orders-admin.component';
+import { PendingOrdersComponent } from './my-orders/pending-orders/pending-orders.component';
+import { PreparingOrdersComponent } from './my-orders/preparing-orders/preparing-orders.component';
+import { DeliveringOrdersComponent } from './my-orders/delivering-orders/delivering-orders.component';
 
 
 const routes: Routes = [
@@ -34,7 +37,11 @@ const routes: Routes = [
   {path:'featuredpacks',component:FeaturedPackComponent},
   {path:'contactus',component:ContantUsComponent},
   {path:'cartview',component:CartComponent},
-  {path: 'myorders',component:MyOrdersComponent},
+  {path: 'myorders',component:MyOrdersComponent,children:[
+    {path:'pending',component:PendingOrdersComponent},
+    {path:'preparing',component:PreparingOrdersComponent},
+    {path:'delivering',component:DeliveringOrdersComponent},
+  ]},
   {path: 'userpacks',component:UserPackComponent ,children:[
     {path:'userpacklist',component:UserPackListComponent},
     {path:':id/viewuserpack',component:UserPackDetailsComponent},

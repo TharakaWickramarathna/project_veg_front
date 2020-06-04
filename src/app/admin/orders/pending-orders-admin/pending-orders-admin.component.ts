@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/shared/services/orders-service.service';
+import { IncomingOrdersModel } from 'src/app/shared/models/incomingOrder.model';
 
 @Component({
   selector: 'app-pending-orders-admin',
@@ -7,14 +8,16 @@ import { OrdersService } from 'src/app/shared/services/orders-service.service';
   styleUrls: ['./pending-orders-admin.component.scss']
 })
 export class PendingOrdersAdminComponent implements OnInit {
-  pendingOrders=[1];
+  
   headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
+
+  pendingOrders:IncomingOrdersModel[];
 
   constructor(private orderService:OrdersService) { }
 
   ngOnInit(): void {
-    this.orderService.fetchAllOrdersFromDatabase().subscribe((res)=>{
-      console.log(res);
+    this.orderService.fetchAllPendingOrdersFromDatabase().subscribe((pendingOrders:IncomingOrdersModel[])=>{
+      this.pendingOrders = this.orderService.sortOrderByDateAndTime(pendingOrders);
     });
 
   }
