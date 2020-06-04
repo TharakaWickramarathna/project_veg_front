@@ -18,6 +18,7 @@ export class PendingOrdersAdminComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.fetchAllPendingOrdersFromDatabase().subscribe((pendingOrders:IncomingOrdersModel[])=>{
       this.pendingOrders = this.orderService.sortOrderByDateAndTime(pendingOrders);
+      //console.log(pendingOrders[0].date.getHours()+"."+(pendingOrders[0].date.getMinutes()));
     });
 
   }
