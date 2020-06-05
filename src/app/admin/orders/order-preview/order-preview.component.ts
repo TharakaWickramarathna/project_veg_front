@@ -21,6 +21,7 @@ export class OrderPreviewComponent implements OnInit {
   totalPrice:number=0;
 
   packImg="https://i.ndtvimg.com/i/2015-04/fruits-veggies-full_600x350_71428309873.jpg";
+  userPackImg="https://cdn.catchme.lk/products/2437/800-fresh-vegetable-pack-5kg-approx-15856253718038.png";
   orderID:string;
   trackingID:string;
   statusOfCompletion:string;
@@ -45,6 +46,7 @@ export class OrderPreviewComponent implements OnInit {
   //get all orders
     this.orderService.fetchAllOrdersFromDatabse().subscribe((orders)=>{
       this.selectSpecificOrder(orders);
+      console.log(this.specificOrder);
       this.makeMainProductList(this.specificOrder);
   //assign money values to variables
       this.orderAmount=this.specificOrder.orderAmount;
@@ -72,6 +74,12 @@ export class OrderPreviewComponent implements OnInit {
 
     for(let v of specificOrder.featuredPacks){
       let x = {productName:v._id.name,quantity:v.quantity,pricePerItem:v.packAmount,imgSrc:this.packImg};
+      this.mainProductList.push(x);
+      //console.log(v);
+    }
+
+    for(let v of specificOrder.userPacks){
+      let x = {productName:v._id.name,quantity:v.quantity,pricePerItem:v.packAmount,imgSrc:this.userPackImg};
       this.mainProductList.push(x);
       //console.log(v);
     }
