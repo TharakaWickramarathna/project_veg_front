@@ -1,1 +1,40 @@
-<p>order-preview works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row" *ngFor="let item of mainProductList">
+                <div class="col-md-12  list-group-item clearfix">
+                    <div class="float-left col-md-4">
+                        <h2>{{item.productName}}</h2>
+                        <!-- <p>{{item.quantity>=100?item.quantity+"g":item.quantity}}</p> -->
+                        <p>Rs {{item.pricePerItem}}/=</p>
+                        <!-- <p>Rs {{productItem.quantity}}/=</p> -->
+                    </div>
+                    <div class="float-left col-md-4 success-color-dark" style="text-align: center;">
+                        <h1 style="color: white;">{{item.quantity>=100?item.quantity+"g":item.quantity}}</h1>
+                    </div>
+                    <span class="float-right">
+                        <img [src]="item.imgSrc" alt="image" style="width: auto;height: 70px;"
+                            class="img-responsive">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="vl"></div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <h2>Status - </h2>
+                <h2>Order Amount - <span style="color: rgb(255, 56, 21);">Rs {{orderAmount}} /=</span></h2>
+                <h2>Delivery Charges - <span style="color: rgb(255, 56, 21);">Rs {{deliveryCharges}} /=</span></h2>
+                <h2>Comission - <span style="color: rgb(255, 56, 21);"> {{Comission}}%</span></h2>
+                <br>
+                <h1 style="font-weight: 700;">Total Price</h1>
+                <span style="color: rgb(255, 56, 21);font-size: xx-large;">Rs {{totalPrice}} /=</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>

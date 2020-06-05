@@ -11,11 +11,11 @@ export class IncomingOrdersModel{
     date:Date;
     orderAmount:number;
     deliveryCharges:number;
-    commision:string;
-    totalAmount:string;
+    commision:number;
+    totalAmount:number;
     vegetables:{_id:Products,quantity:number,pricePerItem:number,isPack:string}[];
-    featuredPacks:{_id:Packages,quantity:number,pricePerItem:number,isPack:string}[];
-    userPacks:{_id:UserPackages,quantity:number,pricePerItem:number,isPack:string}[];
+    featuredPacks:{_id:Packages,quantity:number,packAmount:number,isPack:string}[];
+    userPacks:{_id:UserPackages,quantity:number,packAmount:number,isPack:string}[];
 
   /*          
             "featuredPacks": [
