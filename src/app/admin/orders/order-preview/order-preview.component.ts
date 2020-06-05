@@ -82,7 +82,7 @@ export class OrderPreviewComponent implements OnInit {
   }
 
   makeStatusArrayForDisplay(){
-    let st = ["Pending Approval","Preaparing","Delivering","Completed"];
+    let st = ["Pending Approval","Preparing","Delivering","Completed"];
     if(this.statusOfCompletion==="Pending Approval"){
       this.statusArrayForDisplay.push(st[1]);
     }
