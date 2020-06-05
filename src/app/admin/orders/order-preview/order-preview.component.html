@@ -13,8 +13,7 @@
                         <h1 style="color: white;">{{item.quantity>=100?item.quantity+"g":item.quantity}}</h1>
                     </div>
                     <span class="float-right">
-                        <img [src]="item.imgSrc" alt="image" style="width: auto;height: 70px;"
-                            class="img-responsive">
+                        <img [src]="item.imgSrc" alt="image" style="width: auto;height: 70px;" class="img-responsive">
                     </span>
                 </div>
             </div>
@@ -24,13 +23,29 @@
         </div>
         <div class="col-md-4">
             <div>
-                <h2>Status - </h2>
+                <h2>Status - <span style="background-color: red;color: white;">{{statusOfCompletion}}</span></h2>
+                <button mdbBtn type="button" color="info" rounded="true" size="lg" mdbWavesEffect
+                        (click)="onChangeIditingMode()" *ngIf="!editingStatus">CHANGE STATUS</button>
+
+                <div *ngIf="editingStatus">
+                    <select class="browser-default custom-select" (change)="selectOption($event.target.value)">
+                        <option selected>Select Status</option>
+                        <option *ngFor="let status of statusArrayForDisplay" [value]="status">{{status}}</option>
+                    </select>
+                    <button mdbBtn type="button" color="success" rounded="true" size="md" mdbWavesEffect
+                        [disabled]="disableConfirmButton" (click)="onConfirmClick()">Confirm</button>
+                    <button mdbBtn type="button" color="danger" rounded="true" size="md" mdbWavesEffect
+                        (click)="onCancelClick()">CANCEL</button>
+
+                </div>
+                <br>
+                <br>
                 <h2>Order Amount - <span style="color: rgb(255, 56, 21);">Rs {{orderAmount}} /=</span></h2>
                 <h2>Delivery Charges - <span style="color: rgb(255, 56, 21);">Rs {{deliveryCharges}} /=</span></h2>
                 <h2>Comission - <span style="color: rgb(255, 56, 21);"> {{Comission}}%</span></h2>
                 <br>
                 <h1 style="font-weight: 700;">Total Price</h1>
-                <span style="color: rgb(255, 56, 21);font-size: xx-large;">Rs {{totalPrice}} /=</span>
+                <span style="color: rgb(255, 56, 21);font-size: xx-large;font-weight: 500;">Rs {{totalPrice}} /=</span>
             </div>
         </div>
     </div>
