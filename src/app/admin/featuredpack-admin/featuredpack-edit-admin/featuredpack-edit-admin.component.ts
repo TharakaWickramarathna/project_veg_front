@@ -170,7 +170,7 @@ export class FeaturedpackEditAdminComponent implements OnInit {
         productName:y._id.productName,
         imgSrc:y._id.imgSrc,
         weight:y.quantity,
-        totalPricePerItem:(y._id.unitPrice)*(y.quantity),
+        totalPricePerItem:(y._id.unitPrice)*(y.quantity)/100,
       });
     }
    }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { OrdersService } from 'src/app/shared/services/orders-service.service';
 import { Cart } from 'src/app/shared/cart.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-confirm-popup-modal',
@@ -15,7 +16,8 @@ export class OrderConfirmPopupModalComponent implements OnInit {
 
   constructor(public modalRef: MDBModalRef,
               private cartService:CartService,
-              private orderService:OrdersService) { }
+              private orderService:OrdersService,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +38,8 @@ export class OrderConfirmPopupModalComponent implements OnInit {
 //confirming order by sending order data to databse through order service
     this.orderService.confirmOrder(orderObject).subscribe((res)=>{
       console.log(res);
+      this.modalRef.hide();
+      this.router.navigate(['myorders']);
     });
   }
 

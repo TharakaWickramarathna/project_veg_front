@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/shared/services/orders-service.service';
 import { IncomingOrdersModel } from 'src/app/shared/models/incomingOrder.model';
 import { TrackingService } from 'src/app/shared/services/tracking.service';
@@ -35,7 +35,8 @@ export class OrderPreviewComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,
               private orderService:OrdersService,
-              private trackingService:TrackingService) { }
+              private trackingService:TrackingService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.orderID = this.route.snapshot.params['id'];
@@ -46,7 +47,6 @@ export class OrderPreviewComponent implements OnInit {
   //get all orders
     this.orderService.fetchAllOrdersFromDatabse().subscribe((orders)=>{
       this.selectSpecificOrder(orders);
-      console.log(this.specificOrder);
       this.makeMainProductList(this.specificOrder);
   //assign money values to variables
       this.orderAmount=this.specificOrder.orderAmount;
@@ -112,7 +112,7 @@ export class OrderPreviewComponent implements OnInit {
     this.disableConfirmButton=false;
    }
    else{
-     console.log("no");
+     //console.log("no");
      this.disableConfirmButton=true;
    }
 
@@ -125,7 +125,8 @@ export class OrderPreviewComponent implements OnInit {
 
   onConfirmClick(){
     this.trackingService.editTrackingStatus(this.trackingID,this.newStatusOfCompletion).subscribe((res)=>{
-      console.log(res);
+      //console.log(res);
+      this.router.navigate(['admin','orders']);
     });
   }
 

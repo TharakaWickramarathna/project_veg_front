@@ -39,18 +39,22 @@ const routes: Routes = [
   {path:'contactus',component:ContantUsComponent},
   {path:'cartview',component:CartComponent},
   {path: 'myorders',component:MyOrdersComponent,children:[
+    {path:'',redirectTo:'pending',pathMatch:'full'},
     {path:'pending',component:PendingOrdersComponent},
     {path:'preparing',component:PreparingOrdersComponent},
     {path:'delivering',component:DeliveringOrdersComponent},
   ]},
   {path: 'userpacks',component:UserPackComponent ,children:[
+    {path:'',redirectTo:'userpacklist',pathMatch:'full'},
     {path:'userpacklist',component:UserPackListComponent},
     {path:':id/viewuserpack',component:UserPackDetailsComponent},
     {path:':id/editpack',component:UserPackEditComponent},
     {path:'create',component:UserPackCreateNewComponent}]},
 
   {path:'admin' , component:AdminComponent,children:[
+    {path:'',redirectTo:'dashboard',pathMatch:'full'},
     {path:'orders',component:OrdersComponent,children:[
+      {path:'',redirectTo:'pending',pathMatch:'full'},
       {path:'pending',component:PendingOrdersAdminComponent},
       {path:'preparing',component:PreparingOrdersAdminComponent},
       {path:"delivering",component:DeliveringOrdersAdminComponent},
