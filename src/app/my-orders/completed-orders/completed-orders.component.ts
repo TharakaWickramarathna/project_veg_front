@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CompletedOrdersComponent implements OnInit {
 
   headElements = ['Order ID', 'Date' ,'Time', 'Address', 'Total','Order State'];
+  completedOrders=[];
 
   constructor() { }
 
