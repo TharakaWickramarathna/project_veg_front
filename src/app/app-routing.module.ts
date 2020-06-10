@@ -30,6 +30,7 @@ import { PendingOrdersComponent } from './my-orders/pending-orders/pending-order
 import { PreparingOrdersComponent } from './my-orders/preparing-orders/preparing-orders.component';
 import { DeliveringOrdersComponent } from './my-orders/delivering-orders/delivering-orders.component';
 import { OrderPreviewComponent } from './admin/orders/order-preview/order-preview.component';
+import { CompletedOrdersAdminComponent } from './admin/orders/completed-orders-admin/completed-orders-admin.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,7 @@ const routes: Routes = [
       {path:'pending',component:PendingOrdersAdminComponent},
       {path:'preparing',component:PreparingOrdersAdminComponent},
       {path:"delivering",component:DeliveringOrdersAdminComponent},
+      {path:"completed",component:CompletedOrdersAdminComponent},
       {path:':id/:status',component:OrderPreviewComponent}
     ]},
     {path:'productsadmin',children:[
